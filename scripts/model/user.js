@@ -1,13 +1,11 @@
 var app = app || {};
 
-var User, userSignUpURL, userLoginURL;
+app.user = (function () {
+    var newUser, namePattern, minNameLength, minPasswordLength, isValid, loginURL, mailPattern, filter, User, userSignUpURL, userLoginURL;
 
-userSignUpURL = 'https://api.parse.com/1/users';
-userLoginURL = 'https://api.parse.com/1/login';
-
-User = (function () {
-    var newUser, namePattern, minNameLength, minPasswordLength, isValid, loginURL, mailPattern, filter;
-
+    userSignUpURL = 'https://api.parse.com/1/users';
+    userLoginURL = 'https://api.parse.com/1/login';
+    
     minNameLength = 4;
     minPasswordLength = 6;
 
