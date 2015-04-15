@@ -41,7 +41,7 @@ User = (function () {
         DBNames = [];
         app.requestHandler.getRequest(userSignUpURL, null,
             function (data) {
-                $.each(data[0].results,
+                $.each(data.results,
                     function (index, user) {
                         DBNames.push(user.name);
                     });
