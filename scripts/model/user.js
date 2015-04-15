@@ -12,7 +12,7 @@ User = (function () {
     minPasswordLength = 6;
 
 
-    namePattern = new RegExp('[a-zA-Z0-9_\\-.]{'+ minNameLength +',}');
+    namePattern = new RegExp('[a-zA-Z0-9_\\-.]{' + minNameLength + ',}');
 
     //Don't ask...
     mailPattern = new RegExp("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]" +
@@ -39,11 +39,13 @@ User = (function () {
     function validateDisplayName(name) {
         var DBNames, isContained;
         DBNames = [];
-        sendRequest('get', userSignUpURL, null, null, function () {
-            $.each(arguments[0].results, function (index, user) {
-                DBNames.push(user.name);
-            })
-        });
+        app.requestHandler.getRequest(userSignUpURL, null,
+            function (data) {
+                $.each(data[0].results,
+                    function (index, user) {
+                        DBNames.push(user.name);
+                    });
+            });
         isContained = DBNames.indexOf(name) > -1;
         return !!(validateUsername(name) && !isContained);
     }
@@ -54,26 +56,19 @@ User = (function () {
 
     function register(accountName, name, password, email) {
         newUser = new User(accountName, name, password, email)
-        sendRequest('post', userSignUpURL, newUser, null,
-            function () {
-                console.log(arguments[0]);
-            }, function () {
-                console.log(arguments[0].responseText);
-            });
-        return this;
+        app.requestHandler.postRequest(userSignUpURL, newUser);
     }
 
-    function login(user, password, rememberMe) {
+    function login(user, password, keepMeLogged) {
         if (mailPattern.test(user)) {
             filter = '?where={"email":"' + user.trim() + '"}';
-            sendRequest('get', userSignUpURL + filter, null, null, function (data) {
+            app.requestHandler.getRequest(userSignUpURL + filter, null, function(data){
                 user = data.results[0].username;
             });
         }
         loginURL = userLoginURL + '?username=' + user.trim() + '&password=' + password;
-        sendRequest('get', loginURL, null, null, function (data) {
-            console.log(data)
-            if (rememberMe) {
+        app.requestHandler.getRequest(loginURL, null, function(data){
+            if (keepMeLogged){
                 localStorage['sessionToken'] = data.sessionToken;
             }
         });
@@ -83,4 +78,5 @@ User = (function () {
         register: register,
         login: login
     }
-})();
+})
+();
