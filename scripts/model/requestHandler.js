@@ -1,62 +1,55 @@
 var app = app || {};
 
-define([], function () {
+define(['q'], function (Q) {
     app.requestHandler = (function () {
+        function RequestHandler(baseUrl) {
+            this._baseUrl = baseUrl;
+        }
 
-        var appId, RESTApiKey;
+        RequestHandler.prototype.getRequest = function (serviceUrl) {
+            var headers = getHeaders();
+            var url = this._baseUrl + serviceUrl;
 
-        appId = 'HvWzY9d2JMZkKx37DHCDXmrTWFMVtqHbFWdPaIsn';
-        RESTApiKey = 'ZoKpEeNBk0reOJJTkT4QxCwYzvMkqokNasyoDLhH';
+            return makeRequest('GET', headers, url);
+        };
 
-        function makeRequest(method, url, data, token, success, error) {
-            data = data || null;
-            token = token || null;
-            success = success || logSuccess;
-            error = error || logError;
+        function makeRequest(method, headers, url, data) {
+            var deffer = Q.defer();
+
             $.ajax({
                 method: method,
+                headers: headers,
                 url: url,
-                headers: {
-                    'X-Parse-Application-Id': appId,
-                    'X-Parse-REST-API-Key': RESTApiKey,
-                    'X-Parse-Session-Token': token
-                },
                 data: JSON.stringify(data),
-                //contentType: 'application/json',
-                success: success,
-                error: error
+                success: function (data) {
+                    deffer.resolve(data);
+                },
+                error: function (error) {
+                    deffer.reject(error);
+                }
             });
+
+            return deffer.promise;
         }
 
-        function logSuccess(data){
-            console.log(data);
-        }
+        function getHeaders() {
+            var headers = {
+                'X-Parse-Application-Id' : 'HvWzY9d2JMZkKx37DHCDXmrTWFMVtqHbFWdPaIsn',
+                'X-Parse-REST-API-Key' : 'ZoKpEeNBk0reOJJTkT4QxCwYzvMkqokNasyoDLhH',
+                'Content-Type' : 'application/json'
+            };
 
-        function logError(data){
-            console.log(data.statusText)
-        }
+            if(sessionStorage['logged-in']) {
+                headers['X-Parse-Session-Token'] = sessionStorage['logged-in'];
+            }
 
-        function getRequest(url, token, success, error) {
-            makeRequest('GET', url, null, token, success, error)
-        }
-
-        function postRequest(url, data, token, success, error) {
-            makeRequest('POST', url, data,token, success, error);
-        }
-
-        function deleteRequest(url, token, success, error) {
-            makeRequest('DELETE', url, null, token, success, error)
-        }
-
-        function editRequest(url, data, token, success, error) {
-            makeRequest('PUT', url, data, token, success, error)
+            return headers;
         }
 
         return {
-            getRequest : getRequest,
-            postRequest : postRequest,
-            deleteRequest : deleteRequest,
-            editRequest : editRequest
+            load: function (baseUrl) {
+                return new RequestHandler(baseUrl);
+            }
         }
     })();
 });

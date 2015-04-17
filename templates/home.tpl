@@ -1,0 +1,1 @@
+<h1>Wellcome to Doldur's photo album!</h1>
