@@ -1,10 +1,14 @@
 var app = app || {};
 
-define(['categoryModel', 'categoryView', 'homeView'], function () {
+define(['categoryModel', 'categoryView', 'initialView', 'homeView'], function () {
     app.controller = (function() {
         function Controller(model) {
             this.model = model;
         }
+
+        Controller.prototype.getInitialPage = function (selector) {
+            app.initialView.load(selector);
+        };
 
         Controller.prototype.getHomePage = function (selector) {
             app.homeView.load(selector);

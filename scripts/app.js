@@ -26,6 +26,7 @@ requirejs.config({
         categoryView: 'view/category',
         commentView: 'view/comment',
         headerView: 'view/header',
+        initialView: 'view/initial',
         homeView: 'view/home',
         photoView: 'view/photo',
         rateView: 'view/rate'
@@ -48,6 +49,10 @@ define(['jquery', 'sammy', 'controller'], function ($, Sammy) {
 
         app.router = Sammy(function () {
             var selector = '#wrapper';
+
+            this.get('#/', function () {
+                controller.getInitialPage(selector);
+            });
 
             this.get('#/', function () {
                 controller.getHomePage(selector);
