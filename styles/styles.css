@@ -1,22 +1,28 @@
-body {
-  margin: 0 auto; }
-
 /*# sourceMappingURL=styles.css.map */
+.clearfix:after {
+  display: block;
+  height: 0;
+  clear: both;
+  content: '';
+}
 
-body, div, nav, section, ul, li, a, h1, h2 {
+html, body, div, span, h1, h2, h3, h4, h5, h6, p,  a, img, strong, ul, li, form,
+label, article, aside, footer, header, nav, section, input {
   margin: 0;
   padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
   box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+  vertical-align: baseline;
+  color: #fff;
 }
 
-ul {
+/*...*/
+
+ul, li{
   list-style-type: none;
-}
-
-body {
-  color: #ffffff;
-  font-family: "Helvetica Neue",HelveticaNeue,Helvetica,TeXGyreHeros,FreeSans,"Nimbus Sans L","Liberation Sans",Arial,sans-serif;
-  font-size: 14px;
 }
 
 .inner {
@@ -215,3 +221,104 @@ footer {
   color: #888;
   text-align: center;
 }
+
+/*......*/
+
+
+
+
+.main-nav {
+  position: relative;
+  top: 0;
+  height: 50px;
+  width: 100%;
+  z-index: 1000;
+  background-color: #000;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  font-size: 14px;
+}
+
+.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+  position: relative;
+}
+
+.left {
+  float: left;
+}
+
+.profile {
+  float: right;
+}
+
+.main {
+  position: relative;
+  float: left;
+  display: block;
+  height: 50px;
+  margin-left: -10px;
+  padding: 0 0 0 10px;
+}
+
+.logo {
+  display: block;
+  width: 100px;
+  height: 45px;
+  background: transparent url('../images/logo-min.png') center center no-repeat;
+  float: left;
+  margin: 3px 5px 0 0;
+}
+
+.top {
+  position: relative;
+}
+
+.main-nav ul {
+  position: relative;
+  float: left;
+  display: block;
+  top: 0;
+  font-size: 0;
+}
+
+
+.main-nav ul li {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  line-height: 50px;
+  font-size: 14px;
+}
+
+.main-nav ul li a{
+  display: block;
+  height: 100%;
+  padding: 0 15px;
+  color: #b9c1c7;
+  font-weight: normal;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+}
+
+.main-nav div>ul li a .icon.discover {
+  background-position: -18px top;
+}
+
+.main-nav .left>ul li a .icon, div.main-nav .profile>ul li a .icon {
+  display: block;
+  float: left;
+  width: 18px;
+  height: 50px;
+  text-align: left;
+  font-size: 18px;
+  line-height: 50px;
+}
+
+.main-nav .icon {
+  /*background: transparent url('../images/gallery.png') right bottom no-repeat;*/
+}
+
+

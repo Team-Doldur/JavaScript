@@ -13,6 +13,7 @@
                         <li class="top">
                             <a class="clearfix upload" href="">
                                 <span class="icon upload"></span>
+                                <strong>Upload</strong>
                             </a>
                         </li>
                     </ul>

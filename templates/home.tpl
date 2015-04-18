@@ -1,8 +1,8 @@
 <nav>
     <div class="inner">
-        <div class="logo-container"><a href=""><img src="images/logo-min.png" alt="Logo"/></a></div>
+        <div class="logo"><a href="#/"><img src="images/logo-min.png" alt="Logo"/></a></div>
         <div class="right">
-            <a class="sign-up button submit" href="">Sign up</a>
+            <a class="sign-up button submit" href="#/register">Sign up</a>
             <a class="login button" href="">Log in</a>
         </div>
     </div>
@@ -11,7 +11,7 @@
     <div class="text-wrap">
         <h1>Home to everyone's best photos</h1>
         <h2>Showcase to your work, discover amazing photos, and stay inspired.</h2>
-        <a class="button-large button" href="">Get started</a>
+        <a class="button-large button" href="#/register">Get started</a>
     </div>
 </section>
 <section class="photos">
