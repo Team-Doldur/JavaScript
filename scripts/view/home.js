@@ -2,7 +2,7 @@ var app = app || {};
 
 define(['mustache'], function (Mustache) {
     app.homeView = (function() {
-        function HomeView(selector, data) {
+        function HomeView(selector) {
             $.get('templates/home.tpl', function(template) {
                 var output = Mustache.render(template);
 
@@ -11,8 +11,8 @@ define(['mustache'], function (Mustache) {
         }
 
         return {
-            load: function (selector, data) {
-                return HomeView(selector, data);
+            load: function (selector) {
+                return new HomeView(selector);
             }
         }
     }());

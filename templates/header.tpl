@@ -8,7 +8,7 @@
                     </a>
                     <ul>
                         <li class="active top">
-                            <a class="clearfix" href="">Gallery</a>
+                            <a class="clearfix" href="#/Category">Gallery</a>
                         </li>
                         <li class="top">
                             <a class="clearfix upload" href="">

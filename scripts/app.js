@@ -48,18 +48,20 @@ define(['jquery', 'sammy', 'controller'], function ($, Sammy) {
         var controller = app.controller.load(categories);
 
         app.router = Sammy(function () {
-            var selector = '#wrapper';
+            var headerSelector = '#header';
+            var mainSelector = '#wrapper';
 
             this.get('#/', function () {
-                controller.getHomePage(selector);
+                controller.getHeader(headerSelector);
+                controller.getHomePage(mainSelector);
             });
 
             this.get('#/register', function () {
-                controller.getRegisterPage(selector);
+                controller.getRegisterPage(mainSelector);
             });
 
             this.get('#/Category', function () {
-                controller.getCategoryPage(selector);
+                controller.getCategoryPage(mainSelector);
             });
         });
 

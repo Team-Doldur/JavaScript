@@ -1,12 +1,3 @@
-<nav>
-    <div class="inner">
-        <div class="logo"><a href="#/"><img src="images/logo-min.png" alt="Logo"/></a></div>
-        <div class="right">
-            <a class="sign-up button submit" href="#/register">Sign up</a>
-            <a class="login button" href="">Log in</a>
-        </div>
-    </div>
-</nav>
 <section class="masthead">
     <div class="text-wrap">
         <h1>Home to everyone's best photos</h1>
@@ -88,6 +79,3 @@
         </div>
     </div>
 </section>
-<footer>
-    <p>SOME FOOTER</p>
-</footer>

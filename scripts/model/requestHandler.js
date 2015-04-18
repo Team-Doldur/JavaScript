@@ -18,21 +18,21 @@ define(['q'], function (Q) {
             var url = this._baseUrl + serviceUrl;
             
             return makeRequest('POST', headers, url, data, contentType);
-        }
+        };
         
         RequestHandler.prototype.deleteRequest = function (serviceUrl) {
             var headers = getHeaders();
             var url = this._baseUrl + serviceUrl;
             
             return makeRequest('DELETE', headers, url);
-        }
+        };
         
         RequestHandler.prototype.editRequest = function (serviceUrl, data, contentType) {
             var headers = getHeaders();
             var url = this._baseUrl + serviceUrl;
             
             return makeRequest('PUT', headers, url, data, contentType);
-        }
+        };
         
         function makeRequest(method, headers, url, data, contentType) {
             var deffer = Q.defer();
