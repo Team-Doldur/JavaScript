@@ -12,7 +12,7 @@ define(['mustache'], function (Mustache) {
 
         return {
             load: function (selector, data) {
-                return RegisterView(selector, data);
+                return new RegisterView(selector, data);
             }
         }
     }());

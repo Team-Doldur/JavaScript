@@ -11,7 +11,7 @@
                             <a class="clearfix" href="#/Category">Gallery</a>
                         </li>
                         <li class="top">
-                            <a class="clearfix upload" href="">
+                            <a class="clearfix upload" href="#/">
                                 <span class="icon upload"></span>
                                 <strong>Upload</strong>
                             </a>
@@ -27,7 +27,7 @@
                             </a>
                         </li>
                         <li class="top">
-                            <a class="clearfix login no-icon" href=""><!--login page-->
+                            <a class="clearfix login no-icon" href="#/"><!--login page-->
                                 <strong>Login</strong>
                             </a>
                         </li>

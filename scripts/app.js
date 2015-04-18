@@ -57,10 +57,12 @@ define(['jquery', 'sammy', 'controller'], function ($, Sammy) {
             });
 
             this.get('#/register', function () {
+                controller.getHeader(headerSelector);
                 controller.getRegisterPage(mainSelector);
             });
 
             this.get('#/Category', function () {
+                controller.getHeader(headerSelector);
                 controller.getCategoryPage(mainSelector);
             });
         });
