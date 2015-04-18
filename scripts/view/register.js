@@ -1,9 +1,9 @@
 var app = app || {};
 
 define(['mustache'], function (Mustache) {
-    app.initialView = (function() {
-        function InitialView(selector, data) {
-            $.get('templates/initial.tpl', function(template) {
+    app.registerView = (function() {
+        function RegisterView(selector, data) {
+            $.get('templates/register.tpl', function(template) {
                 var output = Mustache.render(template);
 
                 $(selector).html(output);
@@ -12,7 +12,7 @@ define(['mustache'], function (Mustache) {
 
         return {
             load: function (selector, data) {
-                return InitialView(selector, data);
+                return RegisterView(selector, data);
             }
         }
     }());

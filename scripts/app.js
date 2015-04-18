@@ -26,8 +26,8 @@ requirejs.config({
         categoryView: 'view/category',
         commentView: 'view/comment',
         headerView: 'view/header',
-        initialView: 'view/initial',
         homeView: 'view/home',
+        registerView: 'view/register',
         photoView: 'view/photo',
         rateView: 'view/rate'
     },
@@ -51,11 +51,11 @@ define(['jquery', 'sammy', 'controller'], function ($, Sammy) {
             var selector = '#wrapper';
 
             this.get('#/', function () {
-                controller.getInitialPage(selector);
+                controller.getHomePage(selector);
             });
 
-            this.get('#/', function () {
-                controller.getHomePage(selector);
+            this.get('#/register', function () {
+                controller.getRegisterPage(selector);
             });
 
             this.get('#/Category', function () {
