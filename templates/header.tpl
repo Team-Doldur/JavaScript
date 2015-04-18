@@ -8,7 +8,10 @@
                     </a>
                     <ul>
                         <li class="active top">
-                            <a class="clearfix" href="#/Category">Gallery</a>
+                            <a class="clearfix gallery" href="#/Category">
+                                <span class="icon gallery"></span>
+                                <strong>Gallery</strong>
+                            </a>
                         </li>
                         <li class="top">
                             <a class="clearfix upload" href="#/">
@@ -23,7 +26,7 @@
                         <li class="top">
                             <a class="clearfix signup" href="#/register">
                                 <span class="icon signup"></span>
-                                <strong>Sign up</strong>
+                                <strong class="signup">Sign up</strong>
                             </a>
                         </li>
                         <li class="top">
