@@ -16,33 +16,12 @@ label, article, aside, footer, header, nav, section, input {
   box-sizing: border-box;
   font-family: "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;
   vertical-align: baseline;
-  color: #fff;
 }
 
 /*...*/
 
 ul, li{
   list-style-type: none;
-}
-
-.inner {
-  background-color: #000;
-  height: 60px;
-  padding: 0 10px;
-  margin: 0 auto;
-  border-bottom: 1px solid #333;
-
-}
-
-.logo-container {
-  float: left;
-  margin: 5px 25px 0 0;
-}
-
-.right {
-  float: right;
-  margin: 15px 25px 0 0;
-
 }
 
 .masthead {
@@ -98,6 +77,7 @@ ul, li{
 h1, h2 {
   font-weight: normal;
   text-align: center;
+  color: #fff;
 }
 
 h1 {
@@ -112,7 +92,6 @@ h2 {
 
 .tab-wrapper {
   text-align: center;
-  /*border: 1px solid red;*/
   border-bottom: 1px solid #aaa;
 }
 
@@ -196,7 +175,6 @@ ul.tabs>li:first-child a {
 }
 
 .photo-grid .row div {
-  display: block;
   background-color: grey;
   margin-right: 10px;
   height: 380px;
@@ -223,10 +201,6 @@ footer {
 }
 
 /*......*/
-
-
-
-
 .main-nav {
   position: relative;
   top: 0;
@@ -297,28 +271,29 @@ footer {
   display: block;
   height: 100%;
   padding: 0 15px;
-  color: #b9c1c7;
   font-weight: normal;
   letter-spacing: 0.025em;
   white-space: nowrap;
 }
 
-.main-nav div>ul li a .icon.discover {
-  background-position: -18px top;
+.main-nav a {
+  color: #b9c1c7;
+  text-decoration: none;
 }
 
-.main-nav .left>ul li a .icon, div.main-nav .profile>ul li a .icon {
+.main-nav strong{
+  color: #b9c1c7;
+
+}
+
+.icon.gallery {
+  background: transparent url('../images/gallery.png') right bottom no-repeat;
   display: block;
-  float: left;
   width: 18px;
-  height: 50px;
-  text-align: left;
-  font-size: 18px;
-  line-height: 50px;
+  height: 18px;
+  position: absolute;
 }
 
-.main-nav .icon {
-  /*background: transparent url('../images/gallery.png') right bottom no-repeat;*/
+.icon.upload {
+  background: transparent url('../images/upload.png') right bottom no-repeat;
 }
-
-
