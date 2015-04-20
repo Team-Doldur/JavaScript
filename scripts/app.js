@@ -42,9 +42,9 @@ requirejs.config({
 
 var app = app || {};
 
-define(['jquery', 'sammy', 'controller'], function ($, Sammy) {
+define(['jquery', 'sammy', 'controller', 'categoryModel'], function ($, Sammy, controller, categoryModel) {
     (function() {
-        var categories = app.categoryData.load('https://api.parse.com/1/');
+        var categories = categoryModel.load('https://api.parse.com/1/');
         var controller = app.controller.load(categories);
 
         app.router = Sammy(function () {

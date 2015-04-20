@@ -1,7 +1,5 @@
-var app = app || {};
-
-define(['q', 'requestHandler'], function (Q) {
-    app.category = (function() {
+define(['q', 'requestHandler'], function (Q, requestHandler) {
+    var Category = (function() {
         function Category(name, id) {
             this.name = name;
             this.id = id;
@@ -10,9 +8,9 @@ define(['q', 'requestHandler'], function (Q) {
         return Category;
     })();
 
-    app.categoryData = (function() {
+    var categoryData = (function() {
         function CategoryRepo(baseUrl) {
-            this._requestHandler = app.requestHandler.load(baseUrl);
+            this._requestHandler = requestHandler.load(baseUrl);
             this.caregoriesData = {
                 categories: []
             };
@@ -26,7 +24,7 @@ define(['q', 'requestHandler'], function (Q) {
             this._requestHandler.getRequest('classes/Category/')
                 .then(function (data) {
                     data['results'].forEach(function(dataCategory) {
-                        var category = new app.category(dataCategory.name, dataCategory.objectId);
+                        var category = new Category(dataCategory.name, dataCategory.objectId);
                         _this.caregoriesData['categories'].push(category);
                     });
 
@@ -44,4 +42,6 @@ define(['q', 'requestHandler'], function (Q) {
             }
         }
     })();
+
+    return categoryData;
 });
