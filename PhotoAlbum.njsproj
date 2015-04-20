@@ -71,6 +71,7 @@
     <Content Include="templates\home.tpl" />
     <Content Include="templates\initial.tpl" />
     <Content Include="templates\photo.tpl" />
+    <Content Include="templates\register.tpl" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="scripts\app.js" />

@@ -1,7 +1,5 @@
-var app = app || {};
-
 define(['q'], function (Q) {
-    app.requestHandler = (function () {
+    var requestHandler = (function (baseUrl) {
         function RequestHandler(baseUrl) {
             this._baseUrl = baseUrl;
         }
@@ -18,24 +16,24 @@ define(['q'], function (Q) {
             var url = this._baseUrl + serviceUrl;
             
             return makeRequest('POST', headers, url, data, contentType);
-        };
+        }
         
         RequestHandler.prototype.deleteRequest = function (serviceUrl) {
             var headers = getHeaders();
             var url = this._baseUrl + serviceUrl;
             
             return makeRequest('DELETE', headers, url);
-        };
+        }
         
         RequestHandler.prototype.editRequest = function (serviceUrl, data, contentType) {
             var headers = getHeaders();
             var url = this._baseUrl + serviceUrl;
             
             return makeRequest('PUT', headers, url, data, contentType);
-        };
+        }
         
         function makeRequest(method, headers, url, data, contentType) {
-            var deffer = Q.defer();
+            var deferred = Q.defer();
             
             $.ajax({
                 method: method,
@@ -44,14 +42,14 @@ define(['q'], function (Q) {
                 data: JSON.stringify(data),
                 contentType: contentType,
                 success: function (data) {
-                    deffer.resolve(data);
+                    deferred.resolve(data);
                 },
                 error: function (error) {
-                    deffer.reject(error);
+                    deferred.reject(error);
                 }
             });
             
-            return deffer.promise;
+            return deferred.promise;
         }
         
         function getHeaders() {
@@ -73,4 +71,6 @@ define(['q'], function (Q) {
             }
         }
     })();
+    
+    return requestHandler;
 });
