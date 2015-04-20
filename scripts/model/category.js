@@ -2,8 +2,9 @@ var app = app || {};
 
 define(['q', 'requestHandler'], function (Q) {
     app.category = (function() {
-        function Category(name) {
+        function Category(name, id) {
             this.name = name;
+            this.id = id;
         }
 
         return Category;
@@ -25,7 +26,7 @@ define(['q', 'requestHandler'], function (Q) {
             this._requestHandler.getRequest('classes/Category/')
                 .then(function (data) {
                     data['results'].forEach(function(dataCategory) {
-                        var category = new app.category(dataCategory.name);
+                        var category = new app.category(dataCategory.name, dataCategory.objectId);
                         _this.caregoriesData['categories'].push(category);
                     });
 
