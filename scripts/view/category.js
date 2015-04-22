@@ -1,7 +1,5 @@
-var app = app || {};
-
 define(['mustache'], function (Mustache) {
-    app.categoriesView = (function() {
+    return (function() {
         function CategoriesView(selector, data) {
             $.get('templates/category.tpl', function (template) {
                 var output = Mustache.render(template, data);

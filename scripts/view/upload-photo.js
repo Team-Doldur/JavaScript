@@ -1,7 +1,5 @@
-var app = app || {};
-
 define(['mustache'], function (Mustache) {
-    app.uploadPhotoView = (function() {
+    return (function() {
         function UploadPhotoView(selector, data) {
             $.get('templates/upload-photo.tpl', function (template) {
                 var output = Mustache.render(template, data);

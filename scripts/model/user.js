@@ -1,7 +1,5 @@
-var app = app || {};
-
-define(['requestHandler'], function () {
-    app.user = (function () {
+define(['requestHandler'], function (requestHandler) {
+    return (function () {
         var newUser, namePattern, minNameLength, minPasswordLength, isValid, loginURL, mailPattern, filter, userSignUpURL, userLoginURL;
 
         userSignUpURL = 'https://api.parse.com/1/users';
@@ -40,7 +38,7 @@ define(['requestHandler'], function () {
         function validateDisplayName(name) {
             var DBNames, isContained;
             DBNames = [];
-            app.requestHandler.getRequest(userSignUpURL, null,
+            requestHandler.getRequest(userSignUpURL, null,
                 function (data) {
                     $.each(data.results,
                         function (index, user) {
@@ -57,18 +55,18 @@ define(['requestHandler'], function () {
 
         function register(accountName, name, password, email) {
             newUser = new User(accountName, name, password, email);
-            app.requestHandler.postRequest(userSignUpURL, newUser, 'application/json');
+            requestHandler.postRequest(userSignUpURL, newUser, 'application/json');
         }
 
         function login(user, password, keepMeLogged) {
             if (mailPattern.test(user)) {
                 filter = '?where={"email":"' + user.trim() + '"}';
-                app.requestHandler.getRequest(userSignUpURL + filter, null, function (data) {
+                requestHandler.getRequest(userSignUpURL + filter, null, function (data) {
                     user = data.results[0].username;
                 });
             }
             loginURL = userLoginURL + '?username=' + user.trim() + '&password=' + password;
-            app.requestHandler.getRequest(loginURL, null, function (data) {
+            requestHandler.getRequest(loginURL, null, function (data) {
                 if (keepMeLogged) {
                     localStorage['sessionToken'] = data.sessionToken;
                 }

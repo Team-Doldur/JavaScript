@@ -1,7 +1,5 @@
-var app = app || {};
-
 define(['mustache'], function (Mustache) {
-    app.homeView = (function() {
+    return (function() {
         function HomeView(selector) {
             $.get('templates/home.tpl', function(template) {
                 var output = Mustache.render(template);

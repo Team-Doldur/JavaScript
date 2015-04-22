@@ -1,26 +1,25 @@
-var app = app || {};
-
-define(['headerView', 'homeView', 'registerView', 'categoryModel', 'categoryView', 'uploadPhotoView'], function () {
-    app.controller = (function () {
+define(['headerView', 'homeView', 'registerView', 'categoryView', 'uploadPhotoView'],
+    function (headerView, homeView, registerView, categoryView, uploadPhotoView) {
+    return (function () {
         function Controller(model) {
         }
 
         Controller.prototype.getHeader = function (headerSelector) {
-            app.headerView.load(headerSelector);
+            headerView.load(headerSelector);
         };
 
         Controller.prototype.getHomePage = function (mainSelector) {
-            app.homeView.load(mainSelector);
+            homeView.load(mainSelector);
         };
 
         Controller.prototype.getRegisterPage = function (mainSelector) {
-            app.registerView.load(mainSelector);
+            registerView.load(mainSelector);
         };
 
         Controller.prototype.getCategoryPage = function (mainSelector, model) {
             model.getCategories().then(
                 function (data) {
-                    app.categoriesView.load(mainSelector, data);
+                    categoryView.load(mainSelector, data);
                 },
                 function (error) {
                     console.error(error);
@@ -31,7 +30,7 @@ define(['headerView', 'homeView', 'registerView', 'categoryModel', 'categoryView
         Controller.prototype.getUploadPhotoPage = function (mainSelector, model) {
             model.getCategories().then(
                 function (data) {
-                    app.uploadPhotoView.load(mainSelector, data);
+                    uploadPhotoView.load(mainSelector, data);
                 },
                 function (error) {
                     console.error(error);

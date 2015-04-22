@@ -16,10 +16,12 @@ requirejs.config({
         albumModel: 'model/album',
         categoryModel: 'model/category',
         commentModel: 'model/comment',
+        modelsLoader: 'model/modelsLoader',
         photoModel: 'model/photo',
         rateModel: 'model/rate',
         requestHandler: 'model/requestHandler',
         userModel: 'model/user',
+
 
         // views
         albumView: 'view/album',
@@ -41,15 +43,13 @@ requirejs.config({
     }
 });
 
-var app = app || {};
-
-define(['jquery', 'sammy', 'controller', 'categoryModel', 'albumModel'], function ($, Sammy, controller, categoryModel, albumModel) {
+define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ctrl, modelsLoader) {
     (function() {
-        var categories = categoryModel.load('https://api.parse.com/1/');
-        var albums = albumModel.load('https://api.parse.com/1/');
-        var controller = app.controller.load();
+        var baseUrl = 'https://api.parse.com/1/';
+        var model = modelsLoader.load(baseUrl);
+        var controller = ctrl.load(model);
 
-        app.router = Sammy(function () {
+        var router = Sammy(function () {
             var headerSelector = '#header';
             var mainSelector = '#wrapper';
 
@@ -65,22 +65,22 @@ define(['jquery', 'sammy', 'controller', 'categoryModel', 'albumModel'], functio
 
             this.get('#/Category', function () {
                 controller.getHeader(headerSelector);
-                controller.getCategoryPage(mainSelector, categories);
+                controller.getCategoryPage(mainSelector, model.categories);
             });
 
             this.get('#/upload', function () {
                 controller.getHeader(headerSelector);
-                controller.getUploadPhotoPage(mainSelector, categories);
+                controller.getUploadPhotoPage(mainSelector);
             });
 
             this.get('#/Albums', function(){
                 controller.getHeader(headerSelector);
-                controller.getAlbumPage(mainSelector, albums);
+                controller.getAlbumPage(mainSelector, model.albums);
             });
 
         });
 
-        app.router.run('#/');
+        router.run('#/');
     })();
 });
 

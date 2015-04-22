@@ -1,7 +1,5 @@
-var app = app || {};
-
 define(['mustache'], function (Mustache) {
-    app.headerView = (function() {
+    return (function() {
         function HeaderView(selector) {
             $.get('templates/header.tpl', function(template) {
                 var output = Mustache.render(template);

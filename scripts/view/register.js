@@ -1,8 +1,6 @@
-var app = app || {};
-
 define(['mustache'], function (Mustache) {
-    app.registerView = (function() {
-        function RegisterView(selector, data) {
+    return (function() {
+        function RegisterView(selector) {
             $.get('templates/register.tpl', function(template) {
                 var output = Mustache.render(template);
 
@@ -11,8 +9,8 @@ define(['mustache'], function (Mustache) {
         }
 
         return {
-            load: function (selector, data) {
-                return new RegisterView(selector, data);
+            load: function (selector) {
+                return new RegisterView(selector);
             }
         }
     }());
