@@ -1,11 +1,15 @@
-define(['headerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'uploadPhotoView'],
-    function (headerView, homeView, registerView, loginView, categoryView, uploadPhotoView) {
+define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'uploadPhotoView'],
+    function (headerView, footerView, homeView, registerView, loginView, categoryView, uploadPhotoView) {
     return (function () {
         function Controller(model) {
         }
 
         Controller.prototype.getHeader = function (headerSelector) {
             headerView.load(headerSelector);
+        };
+
+        Controller.prototype.getFooter = function (footerSelector) {
+            footerView.load(footerSelector);
         };
 
         Controller.prototype.getHomePage = function (mainSelector) {

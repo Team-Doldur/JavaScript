@@ -5,3 +5,5 @@
     </li>
     {{/categories}}
 </ul>
+
+<footer class="main-footer"></footer>

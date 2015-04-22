@@ -27,6 +27,7 @@ requirejs.config({
         categoryView: 'view/category',
         commentView: 'view/comment',
         headerView: 'view/header',
+        footerView: 'view/footer',
         homeView: 'view/home',
         registerView: 'view/register',
         loginView: 'view/login',
@@ -51,10 +52,12 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
         var router = Sammy(function () {
             var headerSelector = '#header';
             var mainSelector = '#wrapper';
+            var footerSelector = '.main-footer';
 
             this.get('#/', function () {
                 controller.getHeader(headerSelector);
                 controller.getHomePage(mainSelector);
+                controller.getFooter(footerSelector);
             });
 
             this.get('#/Register', function () {
@@ -70,6 +73,7 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
             this.get('#/Category', function () {
                 controller.getHeader(headerSelector);
                 controller.getCategoryPage(mainSelector, model.categories);
+                controller.getFooter(footerSelector);
             });
 
             this.get('#/Albums', function(){

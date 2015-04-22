@@ -48,6 +48,10 @@ a{
   text-shadow: 0px 1px 0px #08c;
 }
 
+.button:hover {
+  background-color: #00a2f2;
+}
+
 .button-large {
   min-width: 250px;
   height: 50px;
@@ -310,6 +314,11 @@ strong.signup {
   font-weight: bold;
 }
 
+strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
+  background-color: #37ca4d;
+}
+
+
 /*...*/
 .field {
   height: 50px;
@@ -342,19 +351,19 @@ strong.signup {
   text-shadow: 0px 1px 0px #2fab41;
 }
 
-.signup-wrap {
+.signup-wrap, .login-wrap {
   width: 40%;
   margin: 0 auto;
 }
 
-.signup-form-wrap {
+.signup-form-wrap, .login-form-wrap {
    margin-top: 50px;
    border: 2px solid #ccc;
    border-radius: 3px;
    text-align: center;
  }
 
-.signup-form-wrap .top h1{
+.signup-form-wrap .top h1, .login-form-wrap .top h1{
   color: #525558;
   font-size: 24px;
   font-weight: bold;
@@ -372,11 +381,11 @@ strong.signup {
   text-align: left;
 }
 
-.signup-form-wrap .top {
+.signup-form-wrap .top, .login-form-wrap {
    padding: 40px 60px;
 }
 
-.signup-form-wrap li {
+.signup-form-wrap li, .login-form-wrap li {
   margin-bottom: 15px;
 }
 

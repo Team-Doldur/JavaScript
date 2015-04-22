@@ -79,3 +79,4 @@
         </div>
     </div>
 </section>
+<footer class="main-footer"></footer>

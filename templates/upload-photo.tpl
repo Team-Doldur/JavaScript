@@ -35,7 +35,7 @@
                         </label>
                         <select name="" id="photo-album">
                             {{#albums}}
-                            <option>
+                            <option value="{{id}}}">
                                 <span>{{name}}</span>
                             </option>
                             {{/albums}}
