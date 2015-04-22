@@ -1,6 +1,6 @@
 var app = app || {};
 
-define(['headerView', 'homeView', 'registerView', 'categoryModel', 'categoryView'], function () {
+define(['headerView', 'homeView', 'registerView', 'categoryModel', 'categoryView', 'uploadPhotoView'], function () {
     app.controller = (function () {
         function Controller(model) {
         }
@@ -26,6 +26,18 @@ define(['headerView', 'homeView', 'registerView', 'categoryModel', 'categoryView
                     console.error(error);
                 }
             )
+        };
+
+        Controller.prototype.getUploadPhotoPage = function (mainSelector, model) {
+            model.getCategories().then(
+                function (data) {
+                    app.uploadPhotoView.load(mainSelector, data);
+                },
+                function (error) {
+                    console.error(error);
+                }
+            )
+
         };
 
         Controller.prototype.getAlbumPage = function (mainSelector, model) {

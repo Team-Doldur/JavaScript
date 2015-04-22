@@ -14,7 +14,7 @@
                             </a>
                         </li>
                         <li class="top">
-                            <a class="clearfix upload" href="#/">
+                            <a class="clearfix upload" href="#/upload">
                                 <span class="icon upload"></span>
                                 <strong>Upload</strong>
                             </a>
