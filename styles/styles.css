@@ -408,6 +408,11 @@ strong.signup {
 
 }
 
+.upload-photo .upload-btn {
+  height: 80px;
+}
+
+
 .upload-photo .upload-btn label {
     width: 250px;
  }
@@ -457,4 +462,13 @@ strong.signup {
   padding: 5px;
   display: inline-block;
   line-height: 40px;
+}
+
+#img-to-upload {
+  display: block;
+  width: 120px;
+  height: 60px;
+  display: none;
+  border: 1px solid #0099e5;
+  border-radius: 3px;
 }

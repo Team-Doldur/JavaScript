@@ -2,10 +2,11 @@
     <div class="signup-wrap">
         <div class="upload-photo">
             <div class="upload-btn">
-                <label class="button button-large" for="upload-photo">
+                <label class="button button-large" id="upload-photo-label" for="upload-photo">
                     Browse photo
                     <input type="file" id="upload-photo"/>
                 </label>
+                <img id="img-to-upload" src="#" alt="Your image"/>
             </div>
             <div class="photo-details">
                 <ul>
@@ -50,3 +51,26 @@
         </div>
     </div>
 </section>
+
+<script>
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (event) {
+                $('#img-to-upload').attr('src', event.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#upload-photo").change(function(){
+        readURL(this);
+        $('#img-to-upload').show();
+        $('#upload-photo-label').hide();
+        $('#upload-photo').hide();
+
+    });
+</script>
