@@ -29,7 +29,8 @@ requirejs.config({
         homeView: 'view/home',
         registerView: 'view/register',
         photoView: 'view/photo',
-        rateView: 'view/rate'
+        rateView: 'view/rate',
+        uploadPhotoView: 'view/upload-photo'
     },
 
     shim: {
