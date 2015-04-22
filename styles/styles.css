@@ -22,6 +22,10 @@ ul, li{
   list-style-type: none;
 }
 
+a{
+  text-decoration: none;
+}
+
 .masthead {
   background: url("../images/background.jpg") no-repeat;
   height: 500px;
@@ -395,13 +399,62 @@ strong.signup {
   color: #71767a;
 }
 /*...*/
-.upload-photo div {
-  /*background-color: red;*/
-  float: none;
-  display: block;
-  position: static;
+.upload-photo {
+  margin-top: 50px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  text-align: center;
+  padding: 40px 60px;
+
 }
 
-.buttons {
-  /*background-color: green;*/
+.upload-photo .upload-btn label {
+    width: 250px;
+ }
+
+.upload-photo .upload-btn input {
+  cursor: pointer;
+  position: relative;
+  height: 100%;
+  width: auto;
+  opacity: 0;
+  -moz-opacity: 0;
+}
+
+.upload-photo h4 {
+  color: #0099e5;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.upload-photo input, .upload-photo select {
+  font-size: 14px;
+  padding: 8px 10px;
+  color: #525558;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.upload-photo ul li {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.upload-photo .submit-btn{
+  width: 50%;
+  height: 50px;
+  float: right;
+  
+}
+
+.upload-photo .buttons {
+}
+
+
+.upload-photo .buttons .cancel-btn{
+  font-size: 14px;
+  color: #71767a;
+  padding: 5px;
+  display: inline-block;
+  line-height: 40px;
 }

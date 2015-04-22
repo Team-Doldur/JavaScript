@@ -68,6 +68,11 @@ define(['jquery', 'sammy', 'controller', 'categoryModel', 'albumModel'], functio
                 controller.getCategoryPage(mainSelector, categories);
             });
 
+            this.get('#/upload', function () {
+                controller.getHeader(headerSelector);
+                controller.getUploadPhotoPage(mainSelector, categories);
+            });
+
             this.get('#/Albums', function(){
                 controller.getHeader(headerSelector);
                 controller.getAlbumPage(mainSelector, albums);
