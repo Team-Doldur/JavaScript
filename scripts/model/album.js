@@ -16,7 +16,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler, categoryModel) {
 
     function createAlbum(id, name, author, category) {
         //Get category id here.
-        return new Album(name, author, category);
+        return new Album(id, name, author, category);
     }
 
     function pushAlbumToDB(album) {
