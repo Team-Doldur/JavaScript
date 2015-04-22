@@ -1,5 +1,5 @@
-define(['headerView', 'homeView', 'registerView', 'categoryView', 'uploadPhotoView'],
-    function (headerView, homeView, registerView, categoryView, uploadPhotoView) {
+define(['headerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'uploadPhotoView'],
+    function (headerView, homeView, registerView, loginView, categoryView, uploadPhotoView) {
     return (function () {
         function Controller(model) {
         }
@@ -16,6 +16,10 @@ define(['headerView', 'homeView', 'registerView', 'categoryView', 'uploadPhotoVi
             registerView.load(mainSelector);
         };
 
+        Controller.prototype.getLoginPage = function (mainSelector) {
+            loginView.load(mainSelector);
+        };
+
         Controller.prototype.getCategoryPage = function (mainSelector, model) {
             model.getCategories().then(
                 function (data) {
@@ -28,7 +32,7 @@ define(['headerView', 'homeView', 'registerView', 'categoryView', 'uploadPhotoVi
         };
 
         Controller.prototype.getUploadPhotoPage = function (mainSelector, model) {
-            model.getCategories().then(
+            model.categories.getCategories().then(
                 function (data) {
                     uploadPhotoView.load(mainSelector, data);
                 },

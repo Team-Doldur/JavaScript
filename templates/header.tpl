@@ -14,7 +14,7 @@
                             </a>
                         </li>
                         <li class="top">
-                            <a class="clearfix upload" href="#/upload">
+                            <a class="clearfix upload" href="#/Upload">
                                 <span class="icon upload"></span>
                                 <strong>Upload</strong>
                             </a>
@@ -24,13 +24,13 @@
                 <div class="profile">
                     <ul>
                         <li class="top">
-                            <a class="clearfix signup" href="#/register">
+                            <a class="clearfix signup" href="#/Register">
                                 <span class="icon signup"></span>
                                 <strong class="signup">Sign up</strong>
                             </a>
                         </li>
                         <li class="top">
-                            <a class="clearfix login no-icon" href="#/"><!--login page-->
+                            <a class="clearfix login no-icon" href="#/Login"><!--login page-->
                                 <strong>Login</strong>
                             </a>
                         </li>

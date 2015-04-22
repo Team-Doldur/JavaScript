@@ -18,7 +18,6 @@ requirejs.config({
         commentModel: 'model/comment',
         modelsLoader: 'model/modelsLoader',
         photoModel: 'model/photo',
-        rateModel: 'model/rate',
         requestHandler: 'model/requestHandler',
         userModel: 'model/user',
 
@@ -30,8 +29,8 @@ requirejs.config({
         headerView: 'view/header',
         homeView: 'view/home',
         registerView: 'view/register',
+        loginView: 'view/login',
         photoView: 'view/photo',
-        rateView: 'view/rate',
         uploadPhotoView: 'view/upload-photo'
     },
 
@@ -58,9 +57,14 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
                 controller.getHomePage(mainSelector);
             });
 
-            this.get('#/register', function () {
+            this.get('#/Register', function () {
                 controller.getHeader(headerSelector);
                 controller.getRegisterPage(mainSelector);
+            });
+
+            this.get('#/Login', function () {
+                controller.getHeader(headerSelector);
+                controller.getLoginPage(mainSelector);
             });
 
             this.get('#/Category', function () {
@@ -68,16 +72,15 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
                 controller.getCategoryPage(mainSelector, model.categories);
             });
 
-            this.get('#/upload', function () {
-                controller.getHeader(headerSelector);
-                controller.getUploadPhotoPage(mainSelector);
-            });
-
             this.get('#/Albums', function(){
                 controller.getHeader(headerSelector);
                 controller.getAlbumPage(mainSelector, model.albums);
             });
 
+            this.get('#/Upload', function () {
+                controller.getHeader(headerSelector);
+                controller.getUploadPhotoPage(mainSelector, model);
+            });
         });
 
         router.run('#/');
