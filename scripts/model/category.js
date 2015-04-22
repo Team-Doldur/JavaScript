@@ -8,7 +8,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
         return Category;
     })();
 
-    var categoryData = (function() {
+    return (function () {
         function CategoryRepo(baseUrl) {
             this._requestHandler = requestHandler.load(baseUrl);
             this.caregoriesData = {
@@ -23,7 +23,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
 
             this._requestHandler.getRequest('classes/Category/')
                 .then(function (data) {
-                    data['results'].forEach(function(dataCategory) {
+                    data['results'].forEach(function (dataCategory) {
                         var category = new Category(dataCategory.name, dataCategory.objectId);
                         _this.caregoriesData['categories'].push(category);
                     });
@@ -42,6 +42,4 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
             }
         }
     })();
-
-    return categoryData;
 });

@@ -13,6 +13,7 @@ define(['requestHandler'], function () {
 
         namePattern = new RegExp('[a-zA-Z0-9_\\-.]{' + minNameLength + ',}');
 
+        //As long as the above doesn't contain '@' as an allowed character this should suffice if it gets changed use the regex below.
         mailPattern = new RegExp('@');
 
         //new RegExp("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]" +

@@ -1,9 +1,8 @@
 var app = app || {};
 
 define(['headerView', 'homeView', 'registerView', 'categoryModel', 'categoryView'], function () {
-    app.controller = (function() {
+    app.controller = (function () {
         function Controller(model) {
-            this.model = model;
         }
 
         Controller.prototype.getHeader = function (headerSelector) {
@@ -18,8 +17,8 @@ define(['headerView', 'homeView', 'registerView', 'categoryModel', 'categoryView
             app.registerView.load(mainSelector);
         };
 
-        Controller.prototype.getCategoryPage = function (mainSelector) {
-            this.model.getCategories().then(
+        Controller.prototype.getCategoryPage = function (mainSelector, model) {
+            model.getCategories().then(
                 function (data) {
                     app.categoriesView.load(mainSelector, data);
                 },
@@ -27,6 +26,15 @@ define(['headerView', 'homeView', 'registerView', 'categoryModel', 'categoryView
                     console.error(error);
                 }
             )
+        };
+
+        Controller.prototype.getAlbumPage = function (mainSelector, model) {
+            model.getAlbums()
+                .then(function (data){
+                    //TODO: add view model call here.
+                },function(error){
+                    console.error(error)
+                })
         };
 
         return {

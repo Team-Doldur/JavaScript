@@ -42,10 +42,11 @@ requirejs.config({
 
 var app = app || {};
 
-define(['jquery', 'sammy', 'controller', 'categoryModel'], function ($, Sammy, controller, categoryModel) {
+define(['jquery', 'sammy', 'controller', 'categoryModel', 'albumModel'], function ($, Sammy, controller, categoryModel, albumModel) {
     (function() {
         var categories = categoryModel.load('https://api.parse.com/1/');
-        var controller = app.controller.load(categories);
+        var albums = albumModel.load('https://api.parse.com/1/');
+        var controller = app.controller.load();
 
         app.router = Sammy(function () {
             var headerSelector = '#header';
@@ -63,8 +64,14 @@ define(['jquery', 'sammy', 'controller', 'categoryModel'], function ($, Sammy, c
 
             this.get('#/Category', function () {
                 controller.getHeader(headerSelector);
-                controller.getCategoryPage(mainSelector);
+                controller.getCategoryPage(mainSelector, categories);
             });
+
+            this.get('#/Albums', function(){
+                controller.getHeader(headerSelector);
+                controller.getAlbumPage(mainSelector, albums);
+            });
+
         });
 
         app.router.run('#/');
