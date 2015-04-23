@@ -43,7 +43,7 @@ requirejs.config({
     }
 });
 
-define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ctrl, modelsLoader) {
+define(['jquery', 'sammy', 'controller', 'modelsLoader', 'albumModel'], function ($, Sammy, ctrl, modelsLoader, albumModel) {
     (function() {
         var baseUrl = 'https://api.parse.com/1/';
         var model = modelsLoader.load(baseUrl);
@@ -77,9 +77,7 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
 
             this.get('#/Category/:id', function(){
                 controller.getHeader(headerSelector);
-                console.log(this.params['id']);
-                //TODO: get an album by category
-                //controller.getAlbumPage(mainSelector, model.albums);
+                controller.getAlbumPage(mainSelector, model.albums, this.params['id']);
             });
 
             this.get('#/Upload', function () {

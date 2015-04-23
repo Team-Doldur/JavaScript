@@ -37,7 +37,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler, categoryModel) {
             this.albumsData['albums'].length = 0;
 
             if (category) {
-                filter = '?where={"category":{"__type":"Pointer","className":"Category","objectId":"' + category.id + '"}}'
+                filter = '?where={"category":{"__type":"Pointer","className":"Category","objectId":"' + category + '"}}'
             } else {
                 filter = '';
             }
@@ -45,7 +45,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler, categoryModel) {
             this._requestHandler.getRequest(albumURL + filter)
                 .then(function (data) {
                     data['results'].forEach(function (album, index) {
-                        _this.albumsData['albums'].push(createAlbum(album.objectId, album.name, album.author, album.category));
+                        _this.albumsData['albums'].push({id: album.objectId, name: album.name, author: album.author, category: album.category});
                     });
                     deffer.resolve(_this.albumsData)
                 }, function (err) {

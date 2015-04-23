@@ -47,10 +47,10 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
 
         };
 
-        Controller.prototype.getAlbumPage = function (mainSelector, model) {
-            model.getAlbums()
+        Controller.prototype.getAlbumPage = function (mainSelector, model, categoryId) {
+            model.getAlbums(categoryId)
                 .then(function (data){
-                    //TODO: add view model call here.
+                    //TODO call view
                 },function(error){
                     console.error(error)
                 })
