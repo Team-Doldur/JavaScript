@@ -52,7 +52,7 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
         var router = Sammy(function () {
             var headerSelector = '#header';
             var mainSelector = '#wrapper';
-            var footerSelector = '.main-footer';
+            var footerSelector = '#main-footer';
 
             this.get('#/', function () {
                 controller.getHeader(headerSelector);
@@ -73,7 +73,6 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
             this.get('#/Category', function () {
                 controller.getHeader(headerSelector);
                 controller.getCategoryPage(mainSelector, model.categories);
-                controller.getFooter(footerSelector);
             });
 
             this.get('#/Category/:id', function(){
