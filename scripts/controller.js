@@ -32,7 +32,7 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
                 function (error) {
                     console.error(error);
                 }
-            )
+            );
         };
 
         Controller.prototype.getUploadPhotoPage = function (mainSelector, model) {
@@ -44,13 +44,12 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
                     console.error(error);
                 }
             )
-
         };
 
         Controller.prototype.getAlbumPage = function (mainSelector, model, categoryName) {
             model.getAlbums(categoryName)
                 .then(function (data){
-                    albumView.load(mainSelector, model)
+                    albumView.load(mainSelector, data)
                 },function(error){
                     console.error(error)
                 })

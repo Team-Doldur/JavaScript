@@ -43,11 +43,22 @@ requirejs.config({
     }
 });
 
-define(['jquery', 'sammy', 'controller', 'modelsLoader', 'albumModel'], function ($, Sammy, ctrl, modelsLoader, albumModel) {
+define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ctrl, modelsLoader) {
     (function() {
         var baseUrl = 'https://api.parse.com/1/';
         var model = modelsLoader.load(baseUrl);
         var controller = ctrl.load(model);
+
+
+        //model.categories.getCategoryIdByName('Nature').then(
+        //    function (data) {
+        //        console.log(data);
+        //    },
+        //    function (error) {
+        //        console.error(error);
+        //    }
+        //);
+
 
         var router = Sammy(function () {
             var headerSelector = '#header';
