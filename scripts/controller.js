@@ -1,5 +1,5 @@
-define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'uploadPhotoView'],
-    function (headerView, footerView, homeView, registerView, loginView, categoryView, uploadPhotoView) {
+define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'albumView', 'uploadPhotoView'],
+    function (headerView, footerView, homeView, registerView, loginView, categoryView, albumView, uploadPhotoView) {
     return (function () {
         function Controller(model) {
         }
@@ -47,10 +47,10 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
 
         };
 
-        Controller.prototype.getAlbumPage = function (mainSelector, model, categoryId) {
-            model.getAlbums(categoryId)
+        Controller.prototype.getAlbumPage = function (mainSelector, model, categoryName) {
+            model.getAlbums(categoryName)
                 .then(function (data){
-                    //TODO call view
+                    albumView.load(mainSelector, model)
                 },function(error){
                     console.error(error)
                 })

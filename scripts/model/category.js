@@ -27,13 +27,18 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
                         var category = new Category(dataCategory.name, dataCategory.objectId);
                         _this.caregoriesData['categories'].push(category);
                     });
-
                     deffer.resolve(_this.caregoriesData);
                 }, function (error) {
                     deffer.reject(error);
                 });
 
             return deffer.promise;
+        };
+
+        CategoryRepo.prototype.getCategoryIdByName = function (name) {
+            return this.caregoriesData['categories'].filter(function (category) {
+                return category.name == name;
+            }).first().id;
         };
 
         return {

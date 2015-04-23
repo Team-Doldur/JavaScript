@@ -31,13 +31,15 @@ define(['q', 'requestHandler'], function (Q, requestHandler, categoryModel) {
             };
         }
 
-        AlbumRepo.prototype.getAlbums = function (category) {
+        AlbumRepo.prototype.getAlbums = function (categoryName) {
             var deffer = Q.defer();
             var _this = this;
             this.albumsData['albums'].length = 0;
 
-            if (category) {
-                filter = '?where={"category":{"__type":"Pointer","className":"Category","objectId":"' + category + '"}}'
+
+
+            if (categoryName) {
+                filter = '?where={"category":{"__type":"Pointer","className":"Category","objectId":"' + categoryName + '"}}'
             } else {
                 filter = '';
             }
