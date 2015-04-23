@@ -76,9 +76,11 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
                 controller.getFooter(footerSelector);
             });
 
-            this.get('#/Albums', function(){
+            this.get('#/Category/:id', function(){
                 controller.getHeader(headerSelector);
-                controller.getAlbumPage(mainSelector, model.albums);
+                console.log(this.params['id']);
+                //TODO: get an album by category
+                //controller.getAlbumPage(mainSelector, model.albums);
             });
 
             this.get('#/Upload', function () {
