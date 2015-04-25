@@ -59,18 +59,24 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
                 });
         };
 
-        CategoryRepo.prototype.getCategoryIdByName = function(categoryName) {
+        CategoryRepo.prototype.getCategoryNameById = function(id) {
             var deffer = Q.defer();
-            var categoryId = '';
-
-            this._requestHandler.getRequest(this.url)
+            var filter = '?where={"objectId":"' + id + '"}';
+            this._requestHandler.getRequest(this.url+filter)
                 .then(function (data) {
-                    data['results'].forEach(function (category) {
-                        if (category.name === categoryName) {
-                            categoryId = category.objectId;
-                        }
-                    });
-                    deffer.resolve(categoryId);
+                    deffer.resolve(data['results'][0].name);
+                }, function (error) {
+                    deffer.reject(error);
+                });
+            return deffer.promise;
+        };
+
+        CategoryRepo.prototype.getCategoryIdByName = function(name) {
+            var deffer = Q.defer();
+            var filter = '?where={"name":"' + name + '"}';
+            this._requestHandler.getRequest(this.url+filter)
+                .then(function (data) {
+                    deffer.resolve(data['results'][0].objectId);
                 }, function (error) {
                     deffer.reject(error);
                 });

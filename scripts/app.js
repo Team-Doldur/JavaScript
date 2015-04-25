@@ -49,17 +49,6 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
         var model = modelsLoader.load(baseUrl);
         var controller = ctrl.load(model);
 
-
-        //model.categories.getCategoryIdByName('Nature').then(
-        //    function (data) {
-        //        console.log(data);
-        //    },
-        //    function (error) {
-        //        console.error(error);
-        //    }
-        //);
-
-
         var router = Sammy(function () {
             var headerSelector = '#header';
             var mainSelector = '#wrapper';
@@ -100,13 +89,3 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
         router.run('#/');
     })();
 });
-
-//Test new requestHandler with photo:
-
-//require(['jquery', 'photoModel'], function ($, photo) {
-//(function () {
-//    var photos = photo.loadPhotos('https://api.parse.com/1/');
-//    photos.getAllPhotos();
-//    console.log(photos.allPhotos);
-//})();
-//});
