@@ -57,6 +57,19 @@ define(['q', 'requestHandler'], function (Q, requestHandler, categoryModel) {
             return deffer.promise;
         };
 
+        AlbumRepo.prototype.getAlbumById = function (id) {
+            var defer = Q.defer();
+
+            this._requestHandler.getRequest(albumURL + '/' + id)
+                .then(function (data) {
+                    defer.resolve(data);
+                }, function (error) {
+                    defer.reject(error);
+                });
+
+            return defer.promise;
+        };
+
         return {
             load: function (baseURL) {
                 return new AlbumRepo(baseURL)

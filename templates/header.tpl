@@ -19,6 +19,12 @@
                                 <strong>Upload</strong>
                             </a>
                         </li>
+                        <li class="top">
+                            <a class="clearfix upload" href="#/Albums/WcBdaP4y5N">
+                                <span class="icon upload"></span>
+                                <strong>Album</strong>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="profile">
