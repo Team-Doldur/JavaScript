@@ -84,6 +84,11 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
                 controller.getHeader(headerSelector);
                 controller.getUploadPhotoPage(mainSelector, model);
             });
+
+            this.get('#/Albums/:id', function () {
+                controller.getHeader(headerSelector);
+                controller.getViewAlbumPage(mainSelector, model.albums, this.params['id']);
+            })
         });
 
         router.run('#/');

@@ -100,6 +100,7 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             return deffer.promise;
         }
 
+<<<<<<< HEAD
         function filterAlbums(categoryName) {
             var deffer;
             deffer = Q.defer();
@@ -111,6 +112,25 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
                     deffer.reject(err);
                 });
             return deffer.promise;
+=======
+        AlbumRepo.prototype.getAlbumById = function (id) {
+            var defer = Q.defer();
+
+            this._requestHandler.getRequest(albumURL + '/' + id)
+                .then(function (data) {
+                    defer.resolve(data);
+                }, function (error) {
+                    defer.reject(error);
+                });
+
+            return defer.promise;
+        };
+
+        return {
+            load: function (baseURL) {
+                return new AlbumRepo(baseURL)
+            }
+>>>>>>> origin/master
         }
 
         return AlbumRepo
