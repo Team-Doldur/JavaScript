@@ -73,7 +73,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
 
         CategoryRepo.prototype.getCategoryIdByName = function(name) {
             var deffer = Q.defer();
-            var filter = '?where={"name":"' + name + '"}';
+            var filter = '?where={"name":"' + name + '"}&include="category"';
             this._requestHandler.getRequest(this.url+filter)
                 .then(function (data) {
                     deffer.resolve(data['results'][0].objectId);

@@ -4,7 +4,7 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
     albumURL = "classes/Album";
 
     var Album = (function () {
-        var deffer, _category, _id;
+        var _category, _id;
 
         function AlbumForRepo(id, name, author, category) {
             this.id = id;
@@ -26,24 +26,16 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
         }
 
         function createAlbum(id, name, author, category, forDB) {
-            deffer = Q.defer();
-
             if (forDB) {
-                _id = category;
+                _id = category.objectId;
                 _category = new Pointer(_id);
-                deffer.resolve(new AlbumForDB(name, author, _category));
-            } else {
-                _categoryModel.getCategoryNameById(category)
-                    .then(function (category) {
-                        deffer.resolve(new AlbumForRepo(id, name, author, category));
-                    });
+                return new AlbumForDB(name, author, _category);
             }
-            return deffer.promise;
+            _category = category.name;
+            return new AlbumForRepo(id, name, author, _category)
         }
 
-        return {
-            createAlbum: createAlbum
-        };
+        return createAlbum;
     }());
 
     var AlbumRepo = (function () {
@@ -65,13 +57,13 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             if (categoryName) {
                 filterAlbums(categoryName)
                     .then(function (filter) {
-                        return getAlbumAndPushToRepo(_this._requestHandler, repo, albumURL + filter)
+                        return getAlbumAndPushToRepo(_this._requestHandler, repo, albumURL + filter + "&include=category")
                     })
                     .then(function (album) {
                         deffer.resolve(album)
                     })
             } else {
-                getAlbumAndPushToRepo(_this._requestHandler, repo, albumURL)
+                getAlbumAndPushToRepo(_this._requestHandler, repo, albumURL + "?include=category")
                     .then(function (album) {
                         deffer.resolve(album)
                     })
@@ -92,19 +84,17 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             return defer.promise;
         };
 
+        AlbumRepo.prototype.publishAlbum = function (name, author, category) {
+            this._requestHandler.postRequest(albumURL, new Album(null, name, author, category, true));
+        };
         function getAlbumAndPushToRepo(requestHandler, repo, url) {
-            var deffer;
+            var deffer, newAlbum;
             deffer = Q.defer();
             requestHandler.getRequest(url)
                 .then(function (data) {
                     data['results'].forEach(function (album, index) {
-                        //Album.createAlbum(album.objectId, album.name, album.author, album.category.objectId, false)
-                        //    .then(function (album) {
-                        //        repo['albums'].push(album);
-                        //    });
-
-                        //TODO: Fix this so it works as it should... Album category should return a name not id.
-                        repo['albums'].push({id : album.objectId, name: album.name, author: album.author, category: album.category})
+                        newAlbum = new Album(album.objectId, album.name, album.author, album.category, false);
+                        repo['albums'].push(newAlbum);
                         deffer.resolve(repo);
                     });
                 }, function (err) {
@@ -129,14 +119,9 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
         return AlbumRepo
     }());
 
-    function publishAlbum(url, name, author, category) {
-        requestHandler.load(url).postRequest(albumURL, new Album(null, name, author, category, true));
-    }
-
     return {
         load: function (baseURL) {
             return new AlbumRepo(baseURL)
-        },
-        publish: publishAlbum
+        }
     }
 });
