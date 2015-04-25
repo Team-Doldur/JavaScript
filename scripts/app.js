@@ -77,9 +77,14 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
                 controller.getCategoryPage(mainSelector, model.categories);
             });
 
-            this.get('#/Category/:name', function(){
+            this.get('#/Category/:categoryName', function(){
                 controller.getHeader(headerSelector);
-                controller.getAlbumPage(mainSelector, model.albums, this.params['name']);
+                controller.getAlbumPage(mainSelector, model.albums, this.params['categoryName']);
+            });
+
+            this.get('#/Category/:categoryName/:albumName', function () {
+                controller.getHeader(headerSelector);
+                controller.getPhotoPage(mainSelector, model.photos, this.params['albumName']);
             });
 
             this.get('#/Upload', function () {

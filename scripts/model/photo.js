@@ -22,6 +22,12 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
                 this.highRankPhotos = [];
 
             }
+
+            //TODO: refactor getAllPhotos(albumId) to getPhotosByAlbum(albumName)
+
+            PhotosRepo.prototype.getPhotosByAlbum = function (albumName) {
+                console.log(albumName);
+            };
             
             PhotosRepo.prototype.getAllPhotos = function getAllPhotos(albumId) {
                 var _this = this;
@@ -48,7 +54,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
                 });
                 
                 return deferred.promise;
-            }
+            };
             
             PhotosRepo.prototype.postPhoto = function postPhoto() {
                 var _this = this;
@@ -64,13 +70,13 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
                 });
                 
                 return deferred.promise;
-            }
+            };
             
             return PhotosRepo;
         })();
 
         return {
-            loadPhotos: function photos(baseUrl) {
+            load: function photos(baseUrl) {
                 return new PhotosRepo(baseUrl);
             }
         }

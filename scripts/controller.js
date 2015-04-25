@@ -1,5 +1,5 @@
-define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'albumView', 'uploadPhotoView', 'viewAlbumView'],
-    function (headerView, footerView, homeView, registerView, loginView, categoryView, albumView, uploadPhotoView, viewAlbumView) {
+define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'albumView', 'photoView', 'uploadPhotoView', 'viewAlbumView'],
+    function (headerView, footerView, homeView, registerView, loginView, categoryView, albumView, photoView, uploadPhotoView, viewAlbumView) {
     return (function () {
         function Controller(model) {
         }
@@ -35,6 +35,25 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
             );
         };
 
+        Controller.prototype.getAlbumPage = function (mainSelector, model, categoryName) {
+            model.getAlbums(categoryName)
+                .then(function (data){
+                    albumView.load(mainSelector, data)
+                },function(error){
+                    console.error(error)
+                })
+        };
+
+        Controller.prototype.getPhotoPage = function (mainSelector, model, albumName) {
+            model.getPhotosByAlbum(albumName).then(
+                function (data) {
+                    photoView.load(mainSelector, data)
+                },
+                function (error) {
+                    console.error(error);
+                })
+        };
+
         Controller.prototype.getUploadPhotoPage = function (mainSelector, model) {
             model.categories.getCategories().then(
                 function (data) {
@@ -44,15 +63,6 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
                     console.error(error);
                 }
             )
-        };
-
-        Controller.prototype.getAlbumPage = function (mainSelector, model, categoryName) {
-            model.getAlbums(categoryName)
-                .then(function (data){
-                    albumView.load(mainSelector, data)
-                },function(error){
-                    console.error(error)
-                })
         };
 
         Controller.prototype.getViewAlbumPage = function (mainSelector, model, albumId) {
