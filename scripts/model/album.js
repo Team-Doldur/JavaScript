@@ -57,13 +57,13 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             if (categoryName) {
                 filterAlbums(categoryName)
                     .then(function (filter) {
-                        return getAlbumAndPushToRepo(_this._requestHandler, repo, albumURL + filter + "&include=category")
+                        return getAlbumAndPushToRepo(_this._requestHandler, repo, albumURL + filter + "&include=category,author")
                     })
                     .then(function (album) {
                         deffer.resolve(album)
                     })
             } else {
-                getAlbumAndPushToRepo(_this._requestHandler, repo, albumURL + "?include=category")
+                getAlbumAndPushToRepo(_this._requestHandler, repo, albumURL + "?include=category,author")
                     .then(function (album) {
                         deffer.resolve(album)
                     })
