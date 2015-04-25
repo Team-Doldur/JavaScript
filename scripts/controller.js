@@ -1,5 +1,5 @@
-define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'albumView', 'uploadPhotoView'],
-    function (headerView, footerView, homeView, registerView, loginView, categoryView, albumView, uploadPhotoView) {
+define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'albumView', 'uploadPhotoView', 'viewAlbumView'],
+    function (headerView, footerView, homeView, registerView, loginView, categoryView, albumView, uploadPhotoView, viewAlbumView) {
     return (function () {
         function Controller(model) {
         }
@@ -58,7 +58,7 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
         Controller.prototype.getViewAlbumPage = function (mainSelector, model, albumId) {
             model.albums.getAlbumById(albumId)
                 .then(function (data) {
-                    albumView.load(mainSelector, data);
+                    viewAlbumView.load(mainSelector, data);
                 }, function (error) {
                     console.error(error);
                 });

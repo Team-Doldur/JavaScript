@@ -1,29 +1,52 @@
-define(['q', 'requestHandler'], function (Q, requestHandler, categoryModel) {
-    var albumURL, filter;
-
+define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, categoryModel) {
+    var albumURL, filter, _categoryModel;
+    _categoryModel = categoryModel.load('https://api.parse.com/1/');
     albumURL = "classes/Album";
 
     var Album = (function () {
-        function Album(id, name, author, category) {
+        var deffer, _category, _id;
+
+        function AlbumForRepo(id, name, author, category) {
             this.id = id;
             this.name = name;
             this.author = author;
-            this.category = category
+            this.category = category;
         }
 
-        return Album;
-    });
+        function AlbumForDB(name, author, category) {
+            this.name = name;
+            this.author = author;
+            this.category = category;
+        }
 
-    function createAlbum(id, name, author, category) {
-        //Get category id here.
-        return new Album(id, name, author, category);
-    }
+        function Pointer(id) {
+            this.__type = "Pointer";
+            this.className = "Category";
+            this.objectId = id;
+        }
 
-    function pushAlbumToDB(album) {
-        requestHandler.postRequest(albumURL, album, 'application/json');
-    }
+        function createAlbum(id, name, author, category, forDB) {
+            deffer = Q.defer();
 
-    return (function () {
+            if (forDB) {
+                _id = category;
+                _category = new Pointer(_id);
+                deffer.resolve(new AlbumForDB(name, author, _category));
+            } else {
+                _categoryModel.getCategoryNameById(category)
+                    .then(function (category) {
+                        deffer.resolve(new AlbumForRepo(id, name, author, category));
+                    });
+            }
+            return deffer.promise;
+        }
+
+        return {
+            createAlbum: createAlbum
+        };
+    }());
+
+    var AlbumRepo = (function () {
         function AlbumRepo(baseUrl) {
             this._requestHandler = requestHandler.load(baseUrl);
             this.albumsData = {
@@ -32,28 +55,27 @@ define(['q', 'requestHandler'], function (Q, requestHandler, categoryModel) {
         }
 
         AlbumRepo.prototype.getAlbums = function (categoryName) {
-            var deffer = Q.defer();
-            var _this = this;
-            this.albumsData['albums'].length = 0;
+            var _this, deffer, repo;
+            _this = this;
+            repo = this.albumsData;
+            repo['albums'] = [];
 
-
+            deffer = Q.defer();
 
             if (categoryName) {
-                filter = '?where={"category":{"__type":"Pointer","className":"Category","objectId":"' + categoryName + '"}}'
+                filterAlbums(categoryName)
+                    .then(function (filter) {
+                        return getAlbumAndPushToRepo(_this._requestHandler, repo, albumURL + filter)
+                    })
+                    .then(function (album) {
+                        deffer.resolve(album)
+                    })
             } else {
-                filter = '';
+                getAlbumAndPushToRepo(_this._requestHandler, repo, albumURL)
+                    .then(function (album) {
+                        deffer.resolve(album)
+                    })
             }
-
-            this._requestHandler.getRequest(albumURL + filter)
-                .then(function (data) {
-                    data['results'].forEach(function (album, index) {
-                        _this.albumsData['albums'].push({id: album.objectId, name: album.name, author: album.author, category: album.category});
-                    });
-                    deffer.resolve(_this.albumsData)
-                }, function (err) {
-                    deffer.reject(err);
-                });
-
             return deffer.promise;
         };
 
@@ -70,10 +92,51 @@ define(['q', 'requestHandler'], function (Q, requestHandler, categoryModel) {
             return defer.promise;
         };
 
-        return {
-            load: function (baseURL) {
-                return new AlbumRepo(baseURL)
-            }
+        function getAlbumAndPushToRepo(requestHandler, repo, url) {
+            var deffer;
+            deffer = Q.defer();
+            requestHandler.getRequest(url)
+                .then(function (data) {
+                    data['results'].forEach(function (album, index) {
+                        //Album.createAlbum(album.objectId, album.name, album.author, album.category.objectId, false)
+                        //    .then(function (album) {
+                        //        repo['albums'].push(album);
+                        //    });
+
+                        //TODO: Fix this so it works as it should... Album category should return a name not id.
+                        repo['albums'].push({id : album.objectId, name: album.name, author: album.author, category: album.category})
+                        deffer.resolve(repo);
+                    });
+                }, function (err) {
+                    deffer.reject(err)
+                });
+            return deffer.promise;
         }
-    }())
+
+        function filterAlbums(categoryName) {
+            var deffer;
+            deffer = Q.defer();
+            _categoryModel.getCategoryIdByName(categoryName)
+                .then(function (id) {
+                    filter = '?where={"category":{"__type":"Pointer","className":"Category","objectId":"' + id + '"}}';
+                    deffer.resolve(filter);
+                }, function (err) {
+                    deffer.reject(err);
+                });
+            return deffer.promise;
+        }
+
+        return AlbumRepo
+    }());
+
+    function publishAlbum(url, name, author, category) {
+        requestHandler.load(url).postRequest(albumURL, new Album(null, name, author, category, true));
+    }
+
+    return {
+        load: function (baseURL) {
+            return new AlbumRepo(baseURL)
+        },
+        publish: publishAlbum
+    }
 });

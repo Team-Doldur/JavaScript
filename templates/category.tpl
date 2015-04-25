@@ -1,7 +1,7 @@
 <ul>
     {{#categories}}
     <li>
-        <a href="#/Category/{{& name}}">{{name}}</a>
+        <a href="#/Category/{{& name}}" id="{{&id}}">{{name}}</a>
     </li>
     {{/categories}}
 </ul>
