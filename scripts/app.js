@@ -32,7 +32,8 @@ requirejs.config({
         registerView: 'view/register',
         loginView: 'view/login',
         photoView: 'view/photo',
-        uploadPhotoView: 'view/upload-photo'
+        uploadPhotoView: 'view/upload-photo',
+        commentsView: 'view/comments'
     },
 
     shim: {
@@ -98,7 +99,7 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
 
             this.get('#/Albums/:id', function () {
                 controller.getHeader(headerSelector);
-                controller.getViewAlbumPage(mainSelector, model.albums, this.params['id']);
+                controller.getViewAlbumPage(mainSelector, model, this.params['id']);
             })
         });
 

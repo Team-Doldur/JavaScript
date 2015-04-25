@@ -56,12 +56,12 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
         };
 
         Controller.prototype.getViewAlbumPage = function (mainSelector, model, albumId) {
-            model.getAlbumById(albumId)
+            model.albums.getAlbumById(albumId)
                 .then(function (data) {
                     albumView.load(mainSelector, data);
                 }, function (error) {
                     console.error(error);
-                })
+                });
         };
 
         return {
