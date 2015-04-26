@@ -21,24 +21,11 @@
                             <h4>Category</h4>
                         </label>
                         <select name="" id="photo-category">
-                            <option value="Ld3TEqHmpQ" selected>Uncategorized</option>
                             {{#categories}}
                             <option value="{{id}}">
                                 <span>{{name}}</span>
                             </option>
                             {{/categories}}
-                        </select>
-                    </li>
-                    <li>
-                        <label for="photo-album">
-                            <h4>Album</h4>
-                        </label>
-                        <select name="" id="photo-album">
-                            {{#albums}}
-                            <option value="{{id}}}">
-                                <span>{{name}}</span>
-                            </option>
-                            {{/albums}}
                         </select>
                     </li>
                 </ul>
