@@ -62,9 +62,10 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
         };
 
         Controller.prototype.getPhotoPage = function (mainSelector, model, albumName) {
-            model.getPhotosByAlbum(albumName).then(
+            model.getPhotos(albumName).then(
                 function (data) {
-                    photoView.load(mainSelector, data)
+                    console.log(data);
+                    //photoView.load(mainSelector, data)
                 },
                 function (error) {
                     console.error(error);

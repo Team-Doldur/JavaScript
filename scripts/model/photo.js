@@ -1,66 +1,57 @@
-define(['q', 'requestHandler'], function (Q, requestHandler) {
+define(['q', 'requestHandler', 'albumModel'], function (Q, requestHandler, albumModel) {
+    var _albumModel = albumModel.load('https://api.parse.com/1/');
+    var filter;
     var photos = (function () {
         
         var Photo = (function () {
-            function Photo(url, id, comments, rank, author) {
+            function Photo(url, id, comments, rank, author, album) {
                 this.photoUrl = url;
                 this.id = id;
                 this.comments = comments;
                 this.rank = rank;
                 this.author = author;
+                this.album = album;
             }
             
             return Photo;
         })();
         
-        var PhotosRepo = (function (baseUrl) {
+        var PhotosRepo = (function () {
             function PhotosRepo(baseUrl) {
-                this.requester = requestHandler.load(baseUrl);
+                this._requestHandler = requestHandler.load(baseUrl);
                 this.url = 'classes/Picture';
-                this.allPhotos = [];
-                this.albumPhotos = [];
-                this.highRankPhotos = [];
-
+                this.photosData = {
+                    photos: []
+                };
             }
-
-            //TODO: refactor getAllPhotos(albumId) to getPhotosByAlbum(albumName)
-
-            PhotosRepo.prototype.getPhotosByAlbum = function (albumName) {
-                console.log(albumName);
-            };
             
-            PhotosRepo.prototype.getAllPhotos = function getAllPhotos(albumId) {
+            PhotosRepo.prototype.getPhotos = function getAllPhotos(albumName) {
                 var _this = this;
-                
-                var deferred = Q.defer();
-                this.allPhotos.length = 0;
-                
-                if (albumId) {
-                    this.url = this.url + '?where={"album":{"__type":"Pointer","className":"Album","objectId":"' + albumId + '"}}';
+                var repo = this.photosData;
+                repo['photos'] = [];
+                var deffer = Q.defer();
+
+                if (albumName) {
+                    filterPhotos(albumName)
+                        .then(function (filter) {
+                            return getPhotoAndPushToRepo(_this._requestHandler, repo, _this.url + filter + "&include=album,author")
+                        })
+                        .then(function (photo) {
+                            deffer.resolve(photo)
+                        })
+                } else {
+                    getPhotoAndPushToRepo(_this._requestHandler, repo, _this.url + "?include=album,author")
+                        .then(function (photo) {
+                            deffer.resolve(photo)
+                        })
                 }
-                
-                this.requester.getRequest(this.url, null)
-                    .then(function (data) {
-                    data.results.forEach(function (result) {
-                        var pictureUrl = result.picture.url;
-                        var id = result.objectId;
-                        var comments = result.comments;
-                        var photo = new Photo(pictureUrl, id, comments);
-                        _this.allPhotos.push(photo);
-                    });
-                    deferred.resolve(_this.allPhotos);
-                }, function (error) {
-                    deferred.reject(error);
-                });
-                
-                return deferred.promise;
+
+                return deffer.promise;
             };
             
             PhotosRepo.prototype.postPhoto = function postPhoto() {
-                var _this = this;
-                
                 var deferred = Q.defer();
-                
+
                 this.requester.postRequest(serviceUrl, data, contentType)
                     .then(function (data) {
                     
@@ -71,6 +62,35 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
                 
                 return deferred.promise;
             };
+
+            function getPhotoAndPushToRepo(requestHandler, repo, url) {
+                var deffer, newPhoto;
+                deffer = Q.defer();
+                requestHandler.getRequest(url)
+                    .then(function (data) {
+                        data['results'].forEach(function (photo, index) {
+                            newPhoto = new Photo(photo.objectId, photo.name, photo.author, photo.album, false);
+                            repo['albums'].push(newPhoto);
+                            deffer.resolve(repo);
+                        });
+                    }, function (err) {
+                        deffer.reject(err)
+                    });
+                return deffer.promise;
+            }
+
+            function filterPhotos(albumName) {
+                var deffer;
+                deffer = Q.defer();
+                _albumModel.getAlbumIdByName(albumName)
+                    .then(function (id) {
+                        filter = '?where={"album":{"__type":"Pointer","className":"Album","objectId":"' + id + '"}}';
+                        deffer.resolve(filter);
+                    }, function (err) {
+                        deffer.reject(err);
+                    });
+                return deffer.promise;
+            }
             
             return PhotosRepo;
         })();

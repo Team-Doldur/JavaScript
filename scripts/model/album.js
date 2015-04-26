@@ -84,9 +84,22 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             return defer.promise;
         };
 
+        AlbumRepo.prototype.getAlbumIdByName = function(name) {
+            var deffer = Q.defer();
+            var filter = '?where={"name":"' + name + '"}';
+            this._requestHandler.getRequest(albumURL+filter)
+                .then(function (data) {
+                    deffer.resolve(data['results'][0].objectId);
+                }, function (error) {
+                    deffer.reject(error);
+                });
+            return deffer.promise;
+        };
+
         AlbumRepo.prototype.publishAlbum = function (name, author, category) {
             this._requestHandler.postRequest(albumURL, new Album(null, name, author, category, true));
         };
+
         function getAlbumAndPushToRepo(requestHandler, repo, url) {
             var deffer, newAlbum;
             deffer = Q.defer();

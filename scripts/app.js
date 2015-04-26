@@ -82,9 +82,9 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
                 controller.getAlbumPage(mainSelector, model.albums, this.params['categoryAddress']);
             });
 
-            this.get('#/Category/:categoryAddress/:albumName', function () {
+            this.get('#/Category/:categoryAddress/:albumAddress', function () {
                 controller.getHeader(headerSelector);
-                controller.getPhotoPage(mainSelector, model.photos, this.params['albumName']);
+                controller.getPhotoPage(mainSelector, model.photos, this.params['albumAddress']);
             });
 
             this.get('#/Upload', function () {
