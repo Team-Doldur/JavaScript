@@ -74,7 +74,7 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
         AlbumRepo.prototype.getAlbumById = function (id) {
             var defer = Q.defer();
 
-            this._requestHandler.getRequest(albumURL + '/' + id)
+            this._requestHandler.getRequest(albumURL + '/' + id + '?include=author')
                 .then(function (data) {
                     defer.resolve(data);
                 }, function (error) {

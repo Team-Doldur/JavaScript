@@ -94,7 +94,7 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
 
             this.get('#/Albums/:id', function () {
                 controller.getHeader(headerSelector);
-                controller.getViewAlbumPage(mainSelector, model, this.params['id']);
+                controller.getViewAlbumPage(mainSelector, this.params['id']);
             })
         });
 

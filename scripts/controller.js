@@ -1,7 +1,8 @@
-define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'albumView', 'photoView', 'uploadPhotoView', 'viewAlbumView'],
-    function (headerView, footerView, homeView, registerView, loginView, categoryView, albumView, photoView, uploadPhotoView, viewAlbumView) {
+define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'albumView', 'photoView', 'uploadPhotoView', 'viewAlbumView', 'commentsView'],
+    function (headerView, footerView, homeView, registerView, loginView, categoryView, albumView, photoView, uploadPhotoView, viewAlbumView, commentsView) {
     return (function () {
         function Controller(model) {
+            this._model = model;
         }
 
         Controller.prototype.getHeader = function (headerSelector) {
@@ -65,12 +66,23 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
             )
         };
 
-        Controller.prototype.getViewAlbumPage = function (mainSelector, model, albumId) {
-            model.albums.getAlbumById(albumId)
+        Controller.prototype.getViewAlbumPage = function (mainSelector, albumId) {
+            var _this = this;
+
+            this._model.albums.getAlbumById(albumId)
                 .then(function (data) {
-                    viewAlbumView.load(mainSelector, data);
+                    viewAlbumView.load(mainSelector, data, _this);
                 }, function (error) {
                     console.error(error);
+                });
+        };
+
+        Controller.prototype.loadComments = function (selector, resourceType, resourceId) {
+            this._model.comments.getComments(resourceType, resourceId)
+                .then(function (data) {
+                    commentsView.load(selector, data);
+                }, function (error) {
+                    console.log(error);
                 });
         };
 
