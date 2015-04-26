@@ -5,6 +5,21 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
             this._model = model;
         }
 
+        function validateName(name) {
+            var regex = /[^a-zA-Z\s+]+/;
+            if (name.match(regex)) {
+                throw new Error('Invalid name!')
+            }
+        }
+
+        function cryptName(name) {
+            return name.split(' ').join('+');
+        }
+
+        function decryptName(name) {
+            return name.split('+').join(' ');
+        }
+
         Controller.prototype.getHeader = function (headerSelector) {
             headerView.load(headerSelector);
         };
@@ -36,7 +51,8 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
             );
         };
 
-        Controller.prototype.getAlbumPage = function (mainSelector, model, categoryName) {
+        Controller.prototype.getAlbumPage = function (mainSelector, model, categoryAddress) {
+            var categoryName = decryptName(categoryAddress);
             model.getAlbums(categoryName)
                 .then(function (data){
                     albumView.load(mainSelector, data)

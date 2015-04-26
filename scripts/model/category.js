@@ -1,8 +1,9 @@
 define(['q', 'requestHandler'], function (Q, requestHandler) {
     var Category = (function() {
-        function Category(name, id) {
+        function Category(name, id, address) {
             this.name = name;
             this.id = id;
+            this.address = address;
         }
 
         return Category;
@@ -25,7 +26,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
             this._requestHandler.getRequest(this.url)
                 .then(function (data) {
                     data['results'].forEach(function (dataCategory) {
-                        var category = new Category(dataCategory.name, dataCategory.objectId);
+                        var category = new Category(dataCategory.name, dataCategory.objectId, dataCategory.address);
                         _this.caregoriesData['categories'].push(category);
                     });
                     deffer.resolve(_this.caregoriesData);
@@ -39,6 +40,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
         CategoryRepo.prototype.addCategory = function (categoryName) {
             var categoryExist = false;
             var _this = this;
+            
 
             this._requestHandler.getRequest(this.url)
                 .then(function (data) {
