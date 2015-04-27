@@ -67,7 +67,6 @@ define(['q', 'requestHandler', 'albumModel'], function (Q, requestHandler, album
                 deffer = Q.defer();
                 requestHandler.getRequest(url)
                     .then(function (data) {
-                        console.log(data);
                         data['results'].forEach(function (photo) {
                             newPhoto = new Photo(photo.objectId, photo.name, photo.picture.url, photo.author, photo.album, false);
                             repo['photos'].push(newPhoto);

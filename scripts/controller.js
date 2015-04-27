@@ -1,5 +1,7 @@
-define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView', 'albumView', 'photoView', 'uploadPhotoView', 'viewAlbumView', 'commentsView'],
-    function (headerView, footerView, homeView, registerView, loginView, categoryView, albumView, photoView, uploadPhotoView, viewAlbumView, commentsView) {
+define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'categoryView',
+        'albumView', 'photoView', 'uploadPhotoView', 'createAlbumView', 'viewAlbumView', 'commentsView'],
+    function (headerView, footerView, homeView, registerView, loginView, categoryView,
+              albumView, photoView, uploadPhotoView, createAlbumView, viewAlbumView, commentsView) {
     return (function () {
         function Controller(model) {
             this._model = model;
@@ -61,15 +63,27 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
                 })
         };
 
-        Controller.prototype.getPhotoPage = function (mainSelector, model, albumName) {
+        Controller.prototype.getPhotoPage = function (mainSelector, model, albumAddress) {
+            var albumName = decryptName(albumAddress);
             model.getPhotos(albumName).then(
                 function (data) {
-                    console.log(data);
                     photoView.load(mainSelector, data)
                 },
                 function (error) {
                     console.error(error);
                 })
+        };
+
+        Controller.prototype.getCreateAlbumPage = function (mainSelector, model) {
+            model.categories.getCategories().then(
+                function (data) {
+                    createAlbumView.load(mainSelector, data);
+
+                },
+                function (error) {
+                    console.error(error);
+                }
+            )
         };
 
         Controller.prototype.getUploadPhotoPage = function (mainSelector, model) {

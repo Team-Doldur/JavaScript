@@ -14,6 +14,12 @@
                             </a>
                         </li>
                         <li class="top">
+                            <a class="clearfix gallery" href="#/NewAlbum">
+                                <span class="icon gallery"></span>
+                                <strong>New Album</strong>
+                            </a>
+                        </li>
+                        <li class="top">
                             <a class="clearfix upload" href="#/Upload">
                                 <span class="icon upload"></span>
                                 <strong>Upload</strong>

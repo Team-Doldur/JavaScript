@@ -32,6 +32,7 @@ requirejs.config({
         registerView: 'view/register',
         loginView: 'view/login',
         photoView: 'view/photo',
+        createAlbumView: 'view/create-album',
         uploadPhotoView: 'view/upload-photo',
         commentsView: 'view/comments',
         viewAlbumView: 'view/viewAlbum'
@@ -88,6 +89,11 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
                 controller.getHeader(headerSelector);
                 controller.getCategoryPage(mainSelector, model.categories);
                 controller.getPhotoPage(secondarySelector, model.photos, this.params['albumAddress']);
+            });
+
+            this.get('#/NewAlbum', function () {
+                controller.getHeader(headerSelector);
+                controller.getCreateAlbumPage(mainSelector, model);
             });
 
             this.get('#/Upload', function () {
