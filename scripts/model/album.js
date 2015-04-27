@@ -1,10 +1,10 @@
 define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, categoryModel) {
-    var albumURL, filter, _categoryModel;
+    var albumURL, filter, _categoryModel, _requestHandler;
     _categoryModel = categoryModel.load('https://api.parse.com/1/');
     albumURL = "classes/Album";
-
     var Album = (function () {
-        var _category, _id;
+        var _category, _author;
+        var _requestHandler = requestHandler.load('https://api.parse.com/1/');
 
         function AlbumForRepo(id, name, address, author, category) {
             this.id = id;
@@ -21,20 +21,28 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             this.category = category;
         }
 
-        function Pointer(id) {
+        AlbumForDB.prototype.publish = function () {
+            console.log(JSON.stringify(this));
+            _requestHandler.postRequest(albumURL, this, 'application/json');
+        };
+
+        function Pointer(name, id) {
             this.__type = "Pointer";
-            this.className = "Category";
+            this.className = name;
             this.objectId = id;
         }
 
+
         function createAlbum(id, name, address, author, category, forDB) {
-            if (forDB) {
-                _id = category.objectId;
-                _category = new Pointer(_id);
-                return new AlbumForDB(name, address, author, _category);
+            if (category) {
+                if (forDB) {
+                    _category = new Pointer("Category", category);
+                    _author = new Pointer("_User", author);
+                    return new AlbumForDB(name, address, _author, _category);
+                }
+                _category = category.address;
+                return new AlbumForRepo(id, name, address, author, _category)
             }
-            _category = category.address;
-            return new AlbumForRepo(id, name, address, author, _category)
         }
 
         return createAlbum;
@@ -86,20 +94,16 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             return defer.promise;
         };
 
-        AlbumRepo.prototype.getAlbumIdByName = function(name) {
+        AlbumRepo.prototype.getAlbumIdByName = function (name) {
             var deffer = Q.defer();
             var filter = '?where={"name":"' + name + '"}';
-            this._requestHandler.getRequest(albumURL+filter)
+            this._requestHandler.getRequest(albumURL + filter)
                 .then(function (data) {
                     deffer.resolve(data['results'][0].objectId);
                 }, function (error) {
                     deffer.reject(error);
                 });
             return deffer.promise;
-        };
-
-        AlbumRepo.prototype.publishAlbum = function (name, address, author, category) {
-            this._requestHandler.postRequest(albumURL, new Album(null, name, address, author, category, true));
         };
 
         function getAlbumAndPushToRepo(requestHandler, repo, url) {
@@ -134,9 +138,15 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
         return AlbumRepo
     }());
 
+
     return {
         load: function (baseURL) {
             return new AlbumRepo(baseURL)
+        },
+        createAlbum: function (name, author, category) {
+            var address = name.split(' ').join('+');
+            var newAlbum = new Album(null, name, address, author, category, true);
+            newAlbum.publish();
         }
     }
 });
