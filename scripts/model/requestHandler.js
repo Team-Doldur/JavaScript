@@ -59,7 +59,7 @@ define(['q'], function (Q) {
             };
 
             if (sessionStorage['logged-in']) {
-                headers['X-Parse-Session-Token'] = sessionStorage['logged-in'];
+                headers['X-Parse-Session-Token'] = sessionStorage['sessionToken'];
             }
 
             return headers;

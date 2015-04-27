@@ -22,8 +22,8 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
             return name.split('+').join(' ');
         }
 
-        Controller.prototype.getHeader = function (headerSelector) {
-            headerView.load(headerSelector);
+        Controller.prototype.getHeader = function (headerSelector, data) {
+            headerView.load(headerSelector, data);
         };
 
         Controller.prototype.getFooter = function (footerSelector) {

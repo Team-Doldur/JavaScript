@@ -54,15 +54,30 @@ define(['requestHandler'], function (requestHandler) {
             _requestHandler.getRequest(loginURL)
                 .then(function (data) {
                     sessionStorage['sessionToken'] = data.sessionToken;
+                    sessionStorage['logged-in'] = true;
+
+                    _requestHandler.getRequest('users/' + data.objectId)
+                        .then(function (data) {
+                            sessionStorage['currentUser'] = data.username;
+                            window.location.reload();
+                        });
+
                     if (keepMeLogged) {
                         localStorage['sessionToken'] = data.sessionToken;
                     }
                 });
         }
 
+        function logout() {
+            var _requestHandler = requestHandler.load('https://api.parse.com/1/');
+            _requestHandler.postRequest('logout');
+            sessionStorage.clear();
+        }
+
         return {
             register: register,
-            login: login
+            login: login,
+            logout: logout
         }
     })();
 });

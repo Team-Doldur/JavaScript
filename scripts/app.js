@@ -47,7 +47,7 @@ requirejs.config({
 });
 
 define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ctrl, modelsLoader) {
-    (function() {
+    (function () {
         var baseUrl = 'https://api.parse.com/1/';
         var model = modelsLoader.load(baseUrl);
         var controller = ctrl.load(model);
@@ -59,50 +59,50 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
             var footerSelector = '#main-footer';
 
             this.get('#/', function () {
-                controller.getHeader(headerSelector);
+                controller.getHeader(headerSelector, sessionStorage);
                 controller.getHomePage(mainSelector);
                 controller.getFooter(footerSelector);
             });
 
             this.get('#/Register', function () {
-                controller.getHeader(headerSelector);
+                controller.getHeader(headerSelector, sessionStorage);
                 controller.getRegisterPage(mainSelector);
             });
 
             this.get('#/Login', function () {
-                controller.getHeader(headerSelector);
+                controller.getHeader(headerSelector, sessionStorage);
                 controller.getLoginPage(mainSelector);
             });
 
             this.get('#/Category', function () {
-                controller.getHeader(headerSelector);
+                controller.getHeader(headerSelector, sessionStorage);
                 controller.getCategoryPage(mainSelector, model.categories);
             });
 
-            this.get('#/Category/:categoryAddress', function(){
-                controller.getHeader(headerSelector);
+            this.get('#/Category/:categoryAddress', function () {
+                controller.getHeader(headerSelector, sessionStorage);
                 controller.getCategoryPage(mainSelector, model.categories);
                 controller.getAlbumPage(secondarySelector, model.albums, this.params['categoryAddress']);
             });
 
             this.get('#/Category/:categoryAddress/:albumAddress', function () {
-                controller.getHeader(headerSelector);
+                controller.getHeader(headerSelector, sessionStorage);
                 controller.getCategoryPage(mainSelector, model.categories);
                 controller.getPhotoPage(secondarySelector, this.params['albumAddress']);
             });
 
             this.get('#/NewAlbum', function () {
-                controller.getHeader(headerSelector);
+                controller.getHeader(headerSelector, sessionStorage);
                 controller.getCreateAlbumPage(mainSelector, model);
             });
 
             this.get('#/Upload', function () {
-                controller.getHeader(headerSelector);
+                controller.getHeader(headerSelector, sessionStorage);
                 controller.getUploadPhotoPage(mainSelector, model);
             });
 
             this.get('#/Albums/:id', function () {
-                controller.getHeader(headerSelector);
+                controller.getHeader(headerSelector, sessionStorage);
                 controller.getViewAlbumPage(mainSelector, this.params['id']);
             });
 
