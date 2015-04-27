@@ -8,10 +8,10 @@
                     <input class="field username" name="username" placeholder="Username" type="text">
                 </li>
                 <li>
-                    <input class="field password" name="password" placeholder="Password" type="text">
+                    <input class="field password" name="password" placeholder="Password" type="password">
                 </li>
                 <li>
-                    <input class="field email" name="email" placeholder="Email" type="text">
+                    <input class="field email" name="email" placeholder="Email" type="email">
                 </li>
                 <li>
                     <input class="submit-btn" type="submit">
