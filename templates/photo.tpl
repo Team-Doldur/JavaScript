@@ -5,3 +5,4 @@
     </li>
     {{/photos}}
 </ul>
+<div id="comments"></div>

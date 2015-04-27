@@ -63,15 +63,17 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
                 })
         };
 
-        Controller.prototype.getPhotoPage = function (mainSelector, model, albumAddress) {
+        Controller.prototype.getPhotoPage = function (mainSelector, albumAddress) {
             var albumName = decryptName(albumAddress);
-            model.getPhotos(albumName).then(
+            var _this = this;
+
+            this._model.photos.getPhotos(albumName).then(
                 function (data) {
-                    photoView.load(mainSelector, data)
+                    photoView.load(mainSelector, data, _this, albumName);
                 },
                 function (error) {
                     console.error(error);
-                })
+                });
         };
 
         Controller.prototype.getCreateAlbumPage = function (mainSelector, model) {
@@ -108,13 +110,29 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
                 });
         };
 
-        Controller.prototype.loadComments = function (selector, resourceType, resourceId) {
-            this._model.comments.getComments(resourceType, resourceId)
-                .then(function (data) {
-                    commentsView.load(selector, data);
+        Controller.prototype.loadComments = function (selector, resourceType, albumName) {
+            var _this = this;
+
+            this._model.albums.getAlbumIdByName(albumName)
+                .then(function (albumId) {
+                    _this._model.comments.getComments(resourceType, albumId)
+                        .then(function (data) {
+                            commentsView.load(selector, data);
+                        }, function (error) {
+                            console.log(error);
+                        });
                 }, function (error) {
                     console.log(error);
                 });
+        };
+
+        Controller.prototype.storeComment = function (params) {
+            this._model.comments.postComment(params['author'], params['email'], params['comment-text'])
+                .then(function (data) {
+                    console.log(data);
+                }, function (error) {
+                    console.log(error);
+                })
         };
 
         return {

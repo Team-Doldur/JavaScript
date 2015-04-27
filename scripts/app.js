@@ -88,7 +88,7 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
             this.get('#/Category/:categoryAddress/:albumAddress', function () {
                 controller.getHeader(headerSelector);
                 controller.getCategoryPage(mainSelector, model.categories);
-                controller.getPhotoPage(secondarySelector, model.photos, this.params['albumAddress']);
+                controller.getPhotoPage(secondarySelector, this.params['albumAddress']);
             });
 
             this.get('#/NewAlbum', function () {
@@ -104,7 +104,11 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
             this.get('#/Albums/:id', function () {
                 controller.getHeader(headerSelector);
                 controller.getViewAlbumPage(mainSelector, this.params['id']);
-            })
+            });
+
+            this.post('#/StoreComment', function () {
+                controller.storeComment(this.params);
+            });
         });
 
         router.run('#/');

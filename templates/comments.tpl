@@ -1,5 +1,4 @@
-<div id="comments-container">
-    <h1><span id="comment-count">{{comments.length}}</span> Comments</h1>
+<div id="comments-container" style="clear: both;">
     <div id="comments-list">
         {{#comments}}
         <div class="comment">
@@ -7,7 +6,7 @@
                 {{text}}
             </div>
             <div>
-                By <span>{{author.username}}</span>
+                By <span>{{authorName}}</span>
                 on <span>{{createdAt}}</span>
             </div>
 
@@ -16,7 +15,7 @@
     </div>
     <hr/>
     <div id="comment-form">
-        <form>
+        <form action="#/StoreComment" method="post">
             <label for="comment-author">Name</label>
             <input type="text" name="author" id="comment-author"/>
             <label for="comment-email">Email</label>
