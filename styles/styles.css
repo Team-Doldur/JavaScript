@@ -517,8 +517,104 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
 }
 
 .picture > a > img {
-  margin-top: 20px;
-  margin-right: 10px;
+  margin: 10px 10px 0 0;
   float: right;
-  width: 200px;
+  width: 160px;
+  height: 160px;
+  border-radius: 2px;
+  box-shadow: 1px 1px 5px 1px #b9c1c7;
+}
+
+/*album*/
+#album-wrapper {
+  float: right;
+  width: 78%;
+  margin-top: 20px;
+}
+
+#album-wrapper .photos-container {
+  float: left;
+  width: 75%;
+}
+
+#album-wrapper h1 {
+  color: #0099e5;
+  padding: 10px;
+  border-top:1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+#comments {
+  float: right;width: 25%;
+}
+
+/*comments*/
+#comments-container {
+  padding: 0 10px 10px 10px;
+  font-size: 14px;
+}
+
+#comments-list {
+  box-shadow: 0px 0px 1px 1px #ddd;
+  overflow-y: scroll;
+  height: 280px;
+}
+
+#comments-container .comment {
+  border-bottom: 1px solid #ddd;
+  margin: 10px;
+}
+
+#comments-container .comment-text {
+  color: #0099e5;
+  margin-bottom: 5px;
+}
+
+#comments-container .comment-info {
+  font-style: italic;
+  font-size: 12px;
+  color: #777;
+}
+
+#comments-container .comment-info .author span{
+  font-weight: bold;
+  font-style: normal;
+}
+
+#comment-form {
+  margin-top: 10px;
+}
+
+#comment-form label {
+  color: #0099e5;
+  font-size: 14px ;
+  margin-bottom: 10px;
+}
+
+#comment-form input {
+  font-size: 14px;
+  padding: 8px 10px;
+  color: #525558;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+#comment-text {
+  display: block;
+  border: 1px solid #ccc;
+}
+
+#comment-form button {
+  color: #fff;
+  border-radius: 3px;
+  padding: 5px 15px;
+  font-weight: bold;
+  background-color: #0099e5;
+  border: 1px solid #08c;
+  text-shadow: 0px 1px 0px #08c;
+  cursor: pointer;
+}
+
+#comment-form input, #comment-text {
+  margin-bottom: 10px;
 }

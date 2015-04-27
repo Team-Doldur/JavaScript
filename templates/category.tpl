@@ -9,5 +9,5 @@
             {{/categories}}
         </ul>
     </div>
-    <div id="albums"></div>
+    <div id="albums" class="clearfix"></div>
 </div>

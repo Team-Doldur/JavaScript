@@ -1,8 +1,3 @@
-<style>
-    .album-name, .album-author{
-        display: inline-block;
-    }
-</style>
 <div class="albums-container clearfix">
     {{#albums}}
     <a href="#/Category/{{&category}}/{{&address}}">
