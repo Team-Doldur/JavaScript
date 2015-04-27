@@ -65,7 +65,7 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
             model.getPhotos(albumName).then(
                 function (data) {
                     console.log(data);
-                    //photoView.load(mainSelector, data)
+                    photoView.load(mainSelector, data)
                 },
                 function (error) {
                     console.error(error);

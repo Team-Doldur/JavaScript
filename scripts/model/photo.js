@@ -4,11 +4,10 @@ define(['q', 'requestHandler', 'albumModel'], function (Q, requestHandler, album
     var photos = (function () {
         
         var Photo = (function () {
-            function Photo(url, id, comments, rank, author, album) {
-                this.photoUrl = url;
+            function Photo(id, name, address, author, album) {
                 this.id = id;
-                this.comments = comments;
-                this.rank = rank;
+                this.name = name;
+                this.address = address;
                 this.author = author;
                 this.album = album;
             }
@@ -68,9 +67,10 @@ define(['q', 'requestHandler', 'albumModel'], function (Q, requestHandler, album
                 deffer = Q.defer();
                 requestHandler.getRequest(url)
                     .then(function (data) {
-                        data['results'].forEach(function (photo, index) {
-                            newPhoto = new Photo(photo.objectId, photo.name, photo.author, photo.album, false);
-                            repo['albums'].push(newPhoto);
+                        console.log(data);
+                        data['results'].forEach(function (photo) {
+                            newPhoto = new Photo(photo.objectId, photo.name, photo.picture.url, photo.author, photo.album, false);
+                            repo['photos'].push(newPhoto);
                             deffer.resolve(repo);
                         });
                     }, function (err) {
