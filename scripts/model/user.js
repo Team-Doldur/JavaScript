@@ -59,6 +59,7 @@ define(['requestHandler'], function (requestHandler) {
                     _requestHandler.getRequest('users/' + data.objectId)
                         .then(function (data) {
                             sessionStorage['currentUser'] = data.username;
+                            sessionStorage['currentUserId'] = data.objectId;
                             window.location.reload();
                         });
 

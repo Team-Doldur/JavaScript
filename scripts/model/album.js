@@ -22,7 +22,6 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
         }
 
         AlbumForDB.prototype.publish = function () {
-            console.log(JSON.stringify(this));
             _requestHandler.postRequest(albumURL, this, 'application/json');
         };
 

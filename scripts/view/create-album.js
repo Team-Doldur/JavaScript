@@ -6,7 +6,7 @@ define(['mustache', 'albumModel'], function (Mustache, albumModel) {
                 $(selector).html(output);
                 $('.submit-btn').click(function(){
                     var category = $('#album-category').val();
-                    var author = 'Anon';
+                    var author = sessionStorage['currentUserId'];
                     var name = $('#album-title').val();
                     var address = name.split(' ').join('+');
                     albumModel.createAlbum(name, author, category);
