@@ -26,7 +26,8 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
             this._requestHandler.getRequest(this.url)
                 .then(function (data) {
                     data['results'].forEach(function (dataCategory) {
-                        var category = new Category(dataCategory.name, dataCategory.objectId, dataCategory.address);
+                        var address = dataCategory.name.split(' ').join('+');
+                        var category = new Category(dataCategory.name, dataCategory.objectId, address);
                         _this.caregoriesData['categories'].push(category);
                     });
                     deffer.resolve(_this.caregoriesData);

@@ -6,15 +6,17 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
     var Album = (function () {
         var _category, _id;
 
-        function AlbumForRepo(id, name, author, category) {
+        function AlbumForRepo(id, name, address, author, category) {
             this.id = id;
             this.name = name;
+            this.address = address;
             this.author = author;
             this.category = category;
         }
 
-        function AlbumForDB(name, author, category) {
+        function AlbumForDB(name, address, author, category) {
             this.name = name;
+            this.address = address;
             this.author = author;
             this.category = category;
         }
@@ -25,14 +27,14 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             this.objectId = id;
         }
 
-        function createAlbum(id, name, author, category, forDB) {
+        function createAlbum(id, name, address, author, category, forDB) {
             if (forDB) {
                 _id = category.objectId;
                 _category = new Pointer(_id);
-                return new AlbumForDB(name, author, _category);
+                return new AlbumForDB(name, address, author, _category);
             }
-            _category = category.name;
-            return new AlbumForRepo(id, name, author, _category)
+            _category = category.address;
+            return new AlbumForRepo(id, name, address, author, _category)
         }
 
         return createAlbum;
@@ -96,8 +98,8 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             return deffer.promise;
         };
 
-        AlbumRepo.prototype.publishAlbum = function (name, author, category) {
-            this._requestHandler.postRequest(albumURL, new Album(null, name, author, category, true));
+        AlbumRepo.prototype.publishAlbum = function (name, address, author, category) {
+            this._requestHandler.postRequest(albumURL, new Album(null, name, address, author, category, true));
         };
 
         function getAlbumAndPushToRepo(requestHandler, repo, url) {
@@ -106,7 +108,7 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             requestHandler.getRequest(url)
                 .then(function (data) {
                     data['results'].forEach(function (album, index) {
-                        newAlbum = new Album(album.objectId, album.name, album.author, album.category, false);
+                        newAlbum = new Album(album.objectId, album.name, album.address, album.author, album.category, false);
                         repo['albums'].push(newAlbum);
                         deffer.resolve(repo);
                     });
