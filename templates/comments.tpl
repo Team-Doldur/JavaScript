@@ -16,6 +16,8 @@
     <hr/>
     <div id="comment-form">
         <form action="#/StoreComment" method="post">
+            <input type="hidden" name="resourceType" value="{{resourceType}}"/>
+            <input type="hidden" name="resourceId" value="{{resourceId}}"/>
             <label for="comment-author">Name</label>
             <input type="text" name="author" id="comment-author"/>
             <label for="comment-email">Email</label>

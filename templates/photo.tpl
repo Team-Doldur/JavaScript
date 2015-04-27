@@ -1,3 +1,4 @@
+<h1>{{albumName}}</h1>
 <ul>
     {{#photos}}
     <li class="picture">

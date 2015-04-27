@@ -6,7 +6,7 @@ define(['mustache'], function (Mustache) {
                 $(selector).html(output);
             })
                 .done(function () {
-                    controller.loadComments('#comments', 'Album', data.objectId);
+                    controller.loadAlbumComments('#comments', 'Album', data.objectId);
                 });
         }
 

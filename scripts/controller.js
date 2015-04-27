@@ -110,14 +110,14 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
                 });
         };
 
-        Controller.prototype.loadComments = function (selector, resourceType, albumName) {
+        Controller.prototype.loadAlbumComments = function (selector, resourceType, albumName) {
             var _this = this;
 
             this._model.albums.getAlbumIdByName(albumName)
                 .then(function (albumId) {
                     _this._model.comments.getComments(resourceType, albumId)
                         .then(function (data) {
-                            commentsView.load(selector, data);
+                            commentsView.load(selector, data, albumId);
                         }, function (error) {
                             console.log(error);
                         });
@@ -127,7 +127,7 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
         };
 
         Controller.prototype.storeComment = function (params) {
-            this._model.comments.postComment(params['author'], params['email'], params['comment-text'])
+            this._model.comments.postComment(params['resourceType'], params['resourceId'], params['author'], params['email'], params['comment-text'])
                 .then(function (data) {
                     console.log(data);
                 }, function (error) {

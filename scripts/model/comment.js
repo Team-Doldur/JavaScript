@@ -12,9 +12,11 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
             }));
     };
 
-    Comment.prototype.postComment = function (author, authorEmail, text) {
+    Comment.prototype.postComment = function (resourceType, resourceId, author, authorEmail, text) {
         //TODO validate data
         var data = {
+            resourceType: resourceType,
+            resourceId: resourceId,
             authorName: author,
             authorEmail: authorEmail,
             text: text

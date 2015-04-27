@@ -2,11 +2,13 @@ define(['mustache'], function (Mustache) {
     return (function() {
         function PhotoView(selector, data, controller, albumName) {
             $.get('templates/photo.tpl', function (template) {
+                data.albumName = albumName;
                 var output = Mustache.render(template, data);
                 $(selector).html(output);
             })
                 .done(function () {
-                    controller.loadComments('#comments', 'Album', albumName);
+
+                    controller.loadAlbumComments('#comments', 'Album', albumName);
                 });
         }
 
