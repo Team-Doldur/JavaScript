@@ -55,6 +55,8 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
             var headerSelector = '#header';
             var mainSelector = '#wrapper';
             var footerSelector = '#main-footer';
+            var categorySelector = '#categories';
+            var albumSelector = '#albums';
 
             this.get('#/', function () {
                 controller.getHeader(headerSelector);
@@ -74,12 +76,13 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
 
             this.get('#/Category', function () {
                 controller.getHeader(headerSelector);
-                controller.getCategoryPage(mainSelector, model.categories);
+                controller.getCategoryPage(categorySelector, model.categories);
             });
 
             this.get('#/Category/:categoryAddress', function(){
                 controller.getHeader(headerSelector);
-                controller.getAlbumPage(mainSelector, model.albums, this.params['categoryAddress']);
+                controller.getCategoryPage(categorySelector, model.categories);
+                controller.getAlbumPage(albumSelector, model.albums, this.params['categoryAddress']);
             });
 
             this.get('#/Category/:categoryAddress/:albumAddress', function () {

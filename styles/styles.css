@@ -17,6 +17,8 @@ label, article, aside, footer, header, nav, section, input {
   vertical-align: baseline;
 }
 
+
+
 ul, li{
   list-style-type: none;
 }
@@ -24,6 +26,7 @@ ul, li{
 a{
   text-decoration: none;
 }
+
 
 .masthead {
   background: url("../images/background.jpg") no-repeat;
@@ -480,3 +483,63 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
   border: 1px solid #0099e5;
   border-radius: 3px;
 }
+
+/*gallery page*/
+#main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  /*border: 1px solid red;*/
+}
+
+#categories {
+
+}
+
+.categories-container {
+  position: relative;
+  float: left;
+  height: 580px;
+  width: 20%;
+  margin: 20px 20px 0 0;
+  background-color: #f7f8fa;
+  border: 1px solid #eeeff2;
+  padding: 0 20px;
+}
+
+.categories-container h4{
+  font-weight: bold;
+  border-bottom: 1px solid #eeeff2;
+  padding: 10px 5px;
+  color: #888;
+}
+
+.categories-container ul li{
+}
+
+.categories-container ul li:hover a{
+  background-color: #ccc;
+}
+
+.categories-container a {
+  display: block;
+  color: #555;
+  font-size: 14px;
+  padding: 5px;
+}
+
+
+#albums {
+
+}
+
+.albums-container {
+  position: relative;
+  float: right;
+  min-height: 580px;
+  width: 75%;
+  margin: 20px auto;
+  background-color: #f7f8fa;
+  border: 1px solid #eeeff2;
+  padding: 0 20px;
+}
+
