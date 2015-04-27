@@ -53,15 +53,13 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
 
         var router = Sammy(function () {
             var headerSelector = '#header';
-            var homeSelector = '#wrapper';
-            var mainSelector = '#main-content';
+            var mainSelector = '#wrapper';
+            var secondarySelector = '#albums';
             var footerSelector = '#main-footer';
-            var categorySelector = '#categories';
-            var albumSelector = '#albums';
 
             this.get('#/', function () {
                 controller.getHeader(headerSelector);
-                controller.getHomePage(homeSelector);
+                controller.getHomePage(mainSelector);
                 controller.getFooter(footerSelector);
             });
 
@@ -77,18 +75,19 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
 
             this.get('#/Category', function () {
                 controller.getHeader(headerSelector);
-                controller.getCategoryPage(categorySelector, model.categories);
+                controller.getCategoryPage(mainSelector, model.categories);
             });
 
             this.get('#/Category/:categoryAddress', function(){
                 controller.getHeader(headerSelector);
-                controller.getCategoryPage(categorySelector, model.categories);
-                controller.getAlbumPage(albumSelector, model.albums, this.params['categoryAddress']);
+                controller.getCategoryPage(mainSelector, model.categories);
+                controller.getAlbumPage(secondarySelector, model.albums, this.params['categoryAddress']);
             });
 
             this.get('#/Category/:categoryAddress/:albumAddress', function () {
                 controller.getHeader(headerSelector);
-                controller.getPhotoPage(mainSelector, model.photos, this.params['albumAddress']);
+                controller.getCategoryPage(mainSelector, model.categories);
+                controller.getPhotoPage(secondarySelector, model.photos, this.params['albumAddress']);
             });
 
             this.get('#/Upload', function () {

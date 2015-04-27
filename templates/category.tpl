@@ -8,6 +8,4 @@
         {{/categories}}
     </ul>
 </div>
-
-
-
+<div id="albums"></div>

@@ -563,3 +563,9 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
   overflow: hidden;
 }
 
+.picture > a > img {
+  margin-top: 20px;
+  margin-left: 10px;
+  float: left;
+  width: 200px;
+}

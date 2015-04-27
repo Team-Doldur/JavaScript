@@ -19,7 +19,7 @@
             </ul>
         </div>
         <div class="bottom">
-            <a href="#/login">Already have a account?</a>
+            <a href="#/Login">Already have a account?</a>
             <p>By registering, you agree to our Terms of Service</p>
         </div>
     </div>
