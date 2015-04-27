@@ -544,6 +544,11 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
   border-bottom: 1px solid #ccc;
 }
 
+#album-wrapper h1 span{
+  color: #aaa;
+  font-style: italic;
+}
+
 #comments {
   float: right;width: 25%;
 }
