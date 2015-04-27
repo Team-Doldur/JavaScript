@@ -1,24 +1,71 @@
-<h1><span id="comment-count">{{comments.length}}</span> Comments</h1>
-<div id="comments-list">
-    {{#comments}}
-    <div class="comment">
-        <div>
-            By <span>{{author.username}}</span>
-            on <span>{{createdAt}}</span>
+<div id="comments-container">
+    <h1><span id="comment-count">{{comments.length}}</span> Comments</h1>
+    <div id="comments-list">
+        {{#comments}}
+        <div class="comment">
+            <div>
+                {{text}}
+            </div>
+            <div>
+                By <span>{{author.username}}</span>
+                on <span>{{createdAt}}</span>
+            </div>
+
         </div>
-        <div>
-            {{text}}
-        </div>
+        {{/comments}}
     </div>
-    {{/comments}}
+    <hr/>
+    <div id="comment-form">
+        <form>
+            <label for="comment-author">Name</label>
+            <input type="text" name="author" id="comment-author"/>
+            <label for="comment-email">Email</label>
+            <input type="email" name="email" id="comment-email"/>
+            <label for="comment-text">Comment</label>
+            <textarea name="comment-text" id="comment-text" rows="5" cols="28"></textarea>
+            <button type="submit">Post Comment</button>
+        </form>
+    </div>
 </div>
-<hr/>
-<form action="">
-    <label for="comment-author">Name</label>
-    <input type="text" name="author" id="comment-author" style="border: 1px solid #000; display: block;"/>
-    <label for="comment-email">Email</label>
-    <input type="email" name="email" id="comment-email" style="border: 1px solid #000; display: block;"/>
-    <label for="comment-text">Comment</label>
-    <textarea name="comment-text" id="comment-text" cols="100" rows="10" style="border: 1px solid #000; display: block;"></textarea>
-    <button type="submit">Post Comment</button>
-</form>
+<style>
+    #comments-container {
+        padding: 10px;
+    }
+
+    #comment-form {
+    }
+
+    #comment-form label {
+        color: #0099e5;
+        font-size: 14px ;
+        margin-bottom: 10px;
+    }
+
+    #comment-form input {
+        font-size: 14px;
+        padding: 8px 10px;
+        color: #525558;
+        border: 1px solid #ccc;
+        width: 100%;
+    }
+
+    #comment-text {
+        display: block;
+        border: 1px solid #ccc;
+    }
+
+    #comment-form button {
+        color: #fff;
+        border-radius: 3px;
+        padding: 5px 15px;
+        font-weight: bold;
+        background-color: #0099e5;
+        border: 1px solid #08c;
+        text-shadow: 0px 1px 0px #08c;
+        cursor: pointer;
+    }
+
+    #comment-form input, #comment-text {
+        margin-bottom: 10px;
+    }
+</style>

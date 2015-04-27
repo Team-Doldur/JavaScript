@@ -53,14 +53,15 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
 
         var router = Sammy(function () {
             var headerSelector = '#header';
-            var mainSelector = '#wrapper';
+            var homeSelector = '#wrapper';
+            var mainSelector = '#main-content';
             var footerSelector = '#main-footer';
             var categorySelector = '#categories';
             var albumSelector = '#albums';
 
             this.get('#/', function () {
                 controller.getHeader(headerSelector);
-                controller.getHomePage(mainSelector);
+                controller.getHomePage(homeSelector);
                 controller.getFooter(footerSelector);
             });
 
