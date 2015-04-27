@@ -7,57 +7,7 @@
 </section>
 <section class="photos">
     <div class="tab-wrapper">
-        <ul class="tabs">
-            <li>
-                <a href="">Breathtaking images</a>
-            </li>
-            <li>
-                <a href="">Everyday moments</a>
-            </li>
-            <li>
-                <a href="">Summer is coming</a>
-            </li>
-            <li>
-                <a href="">Through the looking glass</a>
-            </li>
-            <li>
-                <a href="">More</a>
-                <div class="categories">
-                    <p>EXPLORE PHOTO CATEGORIES</p>
-                    <div>
-                        <div class="first-col">
-                            <ul>
-                                <li><a href="">Animals</a></li>
-                                <li><a href="">Black and White</a></li>
-                                <li><a href="">City & Architecture</a></li>
-                                <li><a href="">Concert</a></li>
-                                <li><a href="">Family</a></li>
-                                <li><a href="">Fashion</a></li>
-                                <li><a href="">Film</a></li>
-                                <li><a href="">Arts</a></li>
-                                <li><a href="">Food</a></li>
-                                <li><a href="">Animals</a></li>
-                            </ul>
-                        </div>
-                        <div class="second-col">
-                            <ul>
-                                <li><a href="">Nature</a></li>
-                                <li><a href="">People</a></li>
-                                <li><a href="">Sport</a></li>
-                                <li><a href="">Street</a></li>
-                                <li><a href="">Travel</a></li>
-                                <li><a href="">Underwater</a></li>
-                                <li><a href="">Other</a></li>
-                                <li><a href="">Other</a></li>
-                                <li><a href="">Other</a></li>
-                                <li><a href="">Uncategorized</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-
+        A photography community unlike any other
     </div>
     <div class="photo-container">
         <div class="photo-grid">
