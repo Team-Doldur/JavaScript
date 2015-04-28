@@ -1,4 +1,4 @@
-define(['requestHandler'], function (requestHandler) {
+define(['requestHandler', 'q'], function (requestHandler, Q) {
     return (function () {
         var newUser, namePattern, minNameLength, minPasswordLength, isValid, loginURL, mailPattern, filter, userSignUpURL, userLoginURL;
 
@@ -43,36 +43,46 @@ define(['requestHandler'], function (requestHandler) {
         }
 
         function login(user, password, keepMeLogged) {
+            var deffer = Q.defer();
             var _requestHandler = requestHandler.load('https://api.parse.com/1/');
+
+            //if user enter mail he can log in as well
             if (mailPattern.test(user)) {
                 filter = '?where={"email":"' + user.trim() + '"}';
                 _requestHandler.getRequest(userSignUpURL + filter, null, function (data) {
                     user = data.results[0].username;
                 });
             }
+
             loginURL = userLoginURL + '?username=' + user.trim() + '&password=' + password;
             _requestHandler.getRequest(loginURL)
                 .then(function (data) {
                     sessionStorage['sessionToken'] = data.sessionToken;
                     sessionStorage['logged-in'] = true;
-
                     _requestHandler.getRequest('users/' + data.objectId)
                         .then(function (data) {
                             sessionStorage['currentUser'] = data.username;
                             sessionStorage['currentUserId'] = data.objectId;
-                            window.location.reload();
+                            //window.location.replace('#/');
+                            deffer.resolve();
                         });
-
                     if (keepMeLogged) {
                         localStorage['sessionToken'] = data.sessionToken;
                     }
+                }, function(err){
+                    deffer.reject(err);
                 });
+            return deffer.promise
         }
 
         function logout() {
-            var _requestHandler = requestHandler.load('https://api.parse.com/1/');
-            _requestHandler.postRequest('logout');
-            sessionStorage.clear();
+            var _requestHandler = requestHandler.load('https://api.parse.com/1/')
+
+            _requestHandler.postRequest('logout')
+                .then(function(){
+                    sessionStorage.clear();
+                    window.location.reload(true);
+                });
         }
 
         return {

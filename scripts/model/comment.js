@@ -9,7 +9,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
         var defer = Q.defer();
         var comments = [];
 
-        this._requestHandler.getRequest(serviceUrl + '?order=createdAt&where=' + JSON.stringify({
+        this._requestHandler.getRequest(serviceUrl + '?order=-createdAt&where=' + JSON.stringify({
                 resourceType: resourceType,
                 resourceId : resourceId
             }))
@@ -33,7 +33,13 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
     };
 
     Comment.prototype.postComment = function (resourceType, resourceId, author, authorEmail, text) {
-        //TODO validate data
+        var defer = Q.defer();
+        
+        if ($.inArray(resourceType, ['Album', 'Picture']) < 0 || !resourceId || !author || authorEmail.indexOf('@') < 0 || !text) {
+            defer.reject('Invalid data.');
+            return defer.promise;
+        }
+
         var data = {
             resourceType: resourceType,
             resourceId: resourceId,
@@ -42,7 +48,14 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
             text: text
         };
 
-        return this._requestHandler.postRequest(serviceUrl, data);
+        this._requestHandler.postRequest(serviceUrl, data)
+            .then(function (result) {
+                defer.resolve(result);
+            }, function (error) {
+                defer.reject(error);
+            });
+
+        return defer.promise;
     };
 
     function parseDate(date) {

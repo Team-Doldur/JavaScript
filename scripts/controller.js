@@ -79,8 +79,9 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
         Controller.prototype.getCreateAlbumPage = function (mainSelector, model) {
             model.categories.getCategories().then(
                 function (data) {
-                    createAlbumView.load(mainSelector, data);
-
+                    if (sessionStorage['logged-in']) {
+                        createAlbumView.load(mainSelector, data);
+                    }
                 },
                 function (error) {
                     console.error(error);
@@ -92,7 +93,9 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
             var _this = this;
             model.categories.getCategories().then(
                 function (data) {
-                    uploadPhotoView.load(mainSelector, data, _this);
+                    if (sessionStorage['logged-in']) {
+                        uploadPhotoView.load(mainSelector, data, _this);
+                    }
                 },
                 function (error) {
                     console.error(error);
@@ -102,7 +105,7 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
 
         Controller.prototype.sendPhoto = function(file, name, albumId, authorId){
             this._model.photos.postPhoto(file, name, albumId, authorId);
-        }
+        };
 
         Controller.prototype.getViewAlbumPage = function (mainSelector, albumId) {
             var _this = this;
@@ -132,9 +135,15 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
         };
 
         Controller.prototype.storeComment = function (params) {
+            var _this = this;
             this._model.comments.postComment(params['resourceType'], params['resourceId'], params['author'], params['email'], params['comment-text'])
                 .then(function (data) {
-                    console.log(data);
+                    _this._model.albums.getAlbumById(params['resourceId'])
+                        .then(function (album) {
+                            _this.loadAlbumComments('#comments', 'Album', album.address);
+                        }, function (error) {
+                            console.log(error);
+                        });
                 }, function (error) {
                     console.log(error);
                 })

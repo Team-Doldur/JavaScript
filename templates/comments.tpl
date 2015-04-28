@@ -15,14 +15,14 @@
     </div>
     <div id="comment-form">
         <form action="#/StoreComment" method="post">
-            <label for="comment-text">Add comment</label>
-            <textarea name="comment-text" id="comment-text" rows="5"  style="width: 97%"></textarea>
             <input type="hidden" name="resourceType" value="{{resourceType}}"/>
             <input type="hidden" name="resourceId" value="{{resourceId}}"/>
+            <label for="comment-text">Add comment</label>
+            <textarea name="comment-text" id="comment-text" rows="5" style="width: 97%" required="required"></textarea>
             <label for="comment-author">Name</label>
-            <input type="text" name="author" id="comment-author"/>
+            <input type="text" name="author" id="comment-author" required="required"/>
             <label for="comment-email">Email</label>
-            <input type="email" name="email" id="comment-email"/>
+            <input type="email" name="email" id="comment-email" required="required"/>
 
             <button type="submit">Post</button>
         </form>
