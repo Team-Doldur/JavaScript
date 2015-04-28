@@ -10,6 +10,7 @@ define(['mustache', 'albumModel'], function (Mustache, albumModel) {
                     _albumModel.getAlbumsByCategory(categoryId).then(
                         function (response) {
                             $.get('templates/album-option.tpl', function (template) {
+                                console.log(response);
                                     var output = Mustache.render(template, response);
                                     $('#photo-album').html(output);
                             });
@@ -18,15 +19,13 @@ define(['mustache', 'albumModel'], function (Mustache, albumModel) {
                             console.error(error);
                         }
                     )
-
-
-
-
                 })
             })
             .then(function () {
-                var photo;
-                var title;
+                var photo,
+                    title,
+                    albumId,
+                    authorId;
                 $('#upload-photo').bind("change", function (e) {
                     var files = e.target.files || e.dataTransfer.files;
                     photo = files[0];
@@ -34,11 +33,11 @@ define(['mustache', 'albumModel'], function (Mustache, albumModel) {
 
                 $('#uploadbutton').click(function () {
                     title = $('#photo-title').val();
-                    controller.sendPhoto(photo, title);
+                    albumId=$('#photo-album>option:selected').attr('value');
+                    authorId = sessionStorage['currentUserId'];
+                    console.log(authorId);
+                    controller.sendPhoto(photo, title,albumId, authorId);
                 });
-
-
-
             })
         }
 

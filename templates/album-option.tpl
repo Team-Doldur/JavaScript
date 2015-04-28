@@ -1,5 +1,5 @@
 {{#results}}
-<option value="{{id}}">
+<option value="{{&objectId}}">
     <span>{{name}}</span>
 </option>
 {{/results}}

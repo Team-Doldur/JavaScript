@@ -61,17 +61,17 @@ define(['q', 'requestHandler', 'albumModel'], function (Q, requestHandler, album
                         picture: {
                             name: data.name,
                             __type: "File"
-                        }
-                        /**"album": {
-                            "__type": "Pointer",
-                            "className": "Album",
-                            "objectId": albumId
                         },
-                         "author": {
-                            "__type": "Pointer",
-                            "className": "_User",
-                            "objectId": authorId
-                        }**/
+                        album: {
+                            __type: "Pointer",
+                            className: "Album",
+                            objectId: albumId
+                        },
+                        author: {
+                            __type: "Pointer",
+                            className: "_User",
+                            objectId: authorId
+                        }
                     }
                     _this._requestHandler.postRequest(_this.url, addPhotoData)
                     .then(function(data){
