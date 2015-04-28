@@ -42,7 +42,7 @@
             </div>
             <div class="buttons clearfix">
                 <a class="cancel-btn" href="#/Photo">Cancel</a>
-                <input id="uploadbutton" type="button" value="Upload to Parse"/>
+                <input id="uploadbutton" type="button" value="Upload" class="submit-btn"/>
             </div>
         </div>
     </div>

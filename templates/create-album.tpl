@@ -7,7 +7,7 @@
                         <label for="album-title">
                             <h4>Title</h4>
                         </label>
-                        <input type="text" id="album-title" placeholder="img"/>
+                        <input type="text" id="album-title" placeholder="Album name"/>
                     </li>
                     <li>
                         <label for="album-category">

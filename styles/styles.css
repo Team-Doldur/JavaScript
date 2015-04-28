@@ -1,3 +1,8 @@
+@font-face {
+  font-family: bebasBold;
+  src: url('../fonts/BebasBold.ttf');
+}
+
 .clearfix:after {
   display: block;
   height: 0;
@@ -31,8 +36,7 @@ a{
 
 .masthead {
   background: url("../images/background.jpg") no-repeat;
-  background-size: cover;
-  min-width: 100%;
+  background-color: #000;
   height: 500px;
   /*width: 100%;*/
   text-align: center;
@@ -417,11 +421,25 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
   text-align: left;
 }
 
-.upload-photo .submit-btn{
+.upload-photo .submit-btn, #uploadbutton {
   width: 50%;
   height: 50px;
   float: right;
-  
+
+}
+
+.upload-photo #uploadbutton {
+  min-width: 250px;
+  height: 50px;
+  text-align: center;
+  line-height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 10px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0px 1px 0px #2fab41;
 }
 
 .upload-photo .buttons .cancel-btn{
@@ -479,40 +497,34 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
   padding: 5px;
 }
 
-
-#albums {
-
-}
-
 .albums-container {
-  position: relative;
   float: right;
   min-height: 580px;
   width: 75%;
   margin: 20px auto;
-  /*background-color: #f7f8fa;*/
-  /*border: 1px solid #eeeff2;*/
 }
 
 .albums-container .album-info {
   float: left;
   width: 200px;
   height: 200px;
-  border: 1px solid #0099e5;
+  border: 1px solid rgba(149, 71, 229, 0.57);
   margin: 0 10px 10px 0;
   background: url("../images/img10.jpg") no-repeat;
   border-radius: 2px;
-  position: relative;
 }
 
-.albums-container .album-info .album-name {
-  width: 100%;
-  height: 22px;
-  font-size: 18px;
-  font-weight: bold;
-  position: absolute;
+.albums-container .album-name {
   color: #fff;
   overflow: hidden;
+  margin: 10px;
+}
+
+.albums-container .album-name strong {
+  font-weight: normal;
+  font-family: bebasBold, "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif;;
+  font-size: 30px;
+  text-shadow: 1px 1px #777;;
 }
 
 .picture > a > img {
