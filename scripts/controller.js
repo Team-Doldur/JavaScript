@@ -88,16 +88,21 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
             )
         };
 
-        Controller.prototype.getUploadPhotoPage = function (mainSelector, model) {
+        Controller.prototype.getUploadPhotoPage = function (mainSelector, model, controller) {
+            var _this = this;
             model.categories.getCategories().then(
                 function (data) {
-                    uploadPhotoView.load(mainSelector, data);
+                    uploadPhotoView.load(mainSelector, data, _this);
                 },
                 function (error) {
                     console.error(error);
                 }
             )
         };
+
+        Controller.prototype.sendPhoto = function(photo){
+            this._model.photos.postPhoto(photo);
+        }
 
         Controller.prototype.getViewAlbumPage = function (mainSelector, albumId) {
             var _this = this;

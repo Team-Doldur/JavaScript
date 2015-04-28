@@ -8,6 +8,7 @@ requirejs.config({
         mustache: 'lib/mustache.min',
         q: 'lib/q',
         sammy: 'lib/sammy-latest.min',
+        parse:'//www.parsecdn.com/js/parse-1.2.15.min',
 
         // controller
         controller: 'controller',
@@ -114,3 +115,4 @@ define(['jquery', 'sammy', 'controller', 'modelsLoader'], function ($, Sammy, ct
         router.run('#/');
     })();
 });
+

@@ -2,11 +2,13 @@
     <div class="signup-wrap">
         <div class="upload-photo">
             <div class="upload-btn">
+                <form id="fileupload" name="fileupload" enctype="multipart/form-data" method="post">
                 <label class="button button-large" id="upload-photo-label" for="upload-photo">
                     Browse photo
                     <input type="file" id="upload-photo"/>
                 </label>
                 <img id="img-to-upload" src="#" alt="Your image"/>
+                </form>
             </div>
             <div class="photo-details">
                 <ul>
@@ -45,7 +47,7 @@
             </div>
             <div class="buttons clearfix">
                 <a class="cancel-btn" href="#/Photo">Cancel</a>
-                <a class="submit-btn" href="#/Photo">Publish</a>
+                <input id="uploadbutton" type="button" value="Upload to Parse"/>
             </div>
         </div>
     </div>
@@ -70,6 +72,6 @@
         $('#img-to-upload').show();
         $('#upload-photo-label').hide();
         $('#upload-photo').hide();
-
     });
+
 </script>

@@ -1,3 +1,5 @@
+'use strict';
+
 define(['q', 'requestHandler', 'albumModel'], function (Q, requestHandler, albumModel) {
     var _albumModel = albumModel.load('https://api.parse.com/1/');
     var filter;
@@ -47,18 +49,41 @@ define(['q', 'requestHandler', 'albumModel'], function (Q, requestHandler, album
 
                 return deffer.promise;
             };
-            
-            PhotosRepo.prototype.postPhoto = function postPhoto() {
+
+            PhotosRepo.prototype.postPhoto = function postPhoto(file, name, authorId, albumId){
+                var _this = this;
                 var deferred = Q.defer();
 
-                this.requester.postRequest(serviceUrl, data, contentType)
-                    .then(function (data) {
-                    
-                    deferred.resolve();
+                this._requestHandler.postFile(file)
+                .then(function (data) {
+                    var addPhotoData = {
+                        name: name,
+                        picture: {
+                            name: data.name,
+                            __type: "File"
+                        }
+                        /**"album": {
+                            "__type": "Pointer",
+                            "className": "Album",
+                            "objectId": albumId
+                        },
+                         "author": {
+                            "__type": "Pointer",
+                            "className": "_User",
+                            "objectId": authorId
+                        }**/
+                    }
+                    _this._requestHandler.postRequest(_this.url, addPhotoData)
+                    .then(function(data){
+                        console.log(data);
+                    },function(error){
+                        deferred.reject(error);
+                    });
+                    deferred.resolve(data);
                 }, function (error) {
                     deferred.reject(error);
                 });
-                
+
                 return deferred.promise;
             };
 
