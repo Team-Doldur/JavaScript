@@ -9,6 +9,7 @@ requirejs.config({
         q: 'lib/q',
         sammy: 'lib/sammy-latest.min',
         parse:'//www.parsecdn.com/js/parse-1.2.15.min',
+        noty: 'lib/jquery.noty.packaged.min',
 
         // controller
         controller: 'controller',
@@ -43,6 +44,10 @@ requirejs.config({
         sammy: {
             deps: ['jquery'],
             exports: 'Sammy'
+        },
+        noty:{
+            deps: ['jquery'],
+            exports: 'yoty'
         }
     }
 });
