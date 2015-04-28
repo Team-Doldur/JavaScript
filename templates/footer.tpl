@@ -1,16 +1,24 @@
-<footer>
-    <p class="copyright">
-        <img src="images/logo-grey.png" width="80" height="36" alt="Logo"/>
-        © 2015 Doldur Inc. SOME FOOTER | SOME FOOTER | SOME FOOTER
-        <a href="http://jigsaw.w3.org/css-validator">
-            <img style="border:0;width:55px;height:20px"
-                 src="http://jigsaw.w3.org/css-validator/images/vcss"
-                 alt="Valid CSS!" />
+<footer class="clearfix">
+    <div id="footer-logo">
+        <img src="images/logo-grey.png" width="50" height="25" alt="Logo"/>
+    </div>
+    <div id="doldur">
+        <span>© 2015 Doldur inc.</span>
+        <a href="http://jigsaw.w3.org/css-validator/#validate_by_input">
+            <img id="css-icon" src="images/valid-css3.gif" alt="Valid CSS!" />
         </a>
-        <a href="http://jigsaw.w3.org/css-validator">
-            <img style="border:0;width:55px;height:20px"
-                 src="http://jigsaw.w3.org/css-validator/images/vh40"
-                 alt="Valid CSS!" />
+        <a href="http://validator.w3.org/#validate_by_input">
+            <img id="html-icon" src="images/w3c_html5.png" alt="Valid CSS!" />
         </a>
-    </p>
+    </div>
+    <div id="softuni-link">
+        <a href="https://softuni.bg/">
+            <img src="images/softuni.jpg" alt="Softuni"/>
+        </a>
+    </div>
 </footer>
+
+<style>
+
+
+</style>

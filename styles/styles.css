@@ -17,6 +17,10 @@ label, article, aside, footer, header, nav, section, input {
   vertical-align: baseline;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 ul, li{
   list-style-type: none;
 }
@@ -27,7 +31,9 @@ a{
 
 .masthead {
   background: url("../images/background.jpg") no-repeat;
+  background-color: #000;
   height: 500px;
+  /*width: 100%;*/
   text-align: center;
   opacity: 0.9;
 }
@@ -362,7 +368,8 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
   font-size: 12px;
   color: #71767a;
 }
-/*...*/
+
+/*upload photo*/
 .upload-photo {
   margin-top: 50px;
   border: 2px solid #ccc;
@@ -416,10 +423,6 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
   
 }
 
-.upload-photo .buttons {
-}
-
-
 .upload-photo .buttons .cancel-btn{
   font-size: 14px;
   color: #71767a;
@@ -441,11 +444,6 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
 .main-content {
   max-width: 1200px;
   margin: 0 auto;
-  /*border: 1px solid red;*/
-}
-
-#categories {
-
 }
 
 .categories-container {
@@ -622,4 +620,38 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
 
 #comment-form input, #comment-text {
   margin-bottom: 10px;
+}
+
+/*footer*/
+
+footer {
+  position: relative;
+  padding: 5px 0;
+}
+
+footer div {
+  display: inline-block;
+}
+
+#footer-logo, #softuni-link {
+  position: absolute;
+}
+
+#css-icon, #html-icon {
+  border: 0;
+  width: 55px;
+  height: 20px;
+}
+
+#html-icon {
+  top: 10px;
+}
+
+#footer-logo {
+  left: 50px;
+  top: 5px;
+}
+
+#softuni-link {
+  right: 90px;
 }
