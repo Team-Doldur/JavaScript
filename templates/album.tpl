@@ -2,7 +2,7 @@
     {{#albums}}
     <a href="#/Category/{{&category}}/{{&address}}">
         <div class="album-info">
-            <div class="album-name">{{name}}</div>
+            <div class="album-name"><strong>{{name}}</strong></div>
         </div>
     </a>
     {{/albums}}
