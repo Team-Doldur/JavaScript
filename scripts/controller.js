@@ -102,7 +102,7 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
 
         Controller.prototype.sendPhoto = function(file, name, albumId, authorId){
             this._model.photos.postPhoto(file, name, albumId, authorId);
-        }
+        };
 
         Controller.prototype.getViewAlbumPage = function (mainSelector, albumId) {
             var _this = this;
@@ -132,9 +132,15 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
         };
 
         Controller.prototype.storeComment = function (params) {
+            var _this = this;
             this._model.comments.postComment(params['resourceType'], params['resourceId'], params['author'], params['email'], params['comment-text'])
                 .then(function (data) {
-                    console.log(data);
+                    _this._model.albums.getAlbumById(params['resourceId'])
+                        .then(function (album) {
+                            _this.loadAlbumComments('#comments', 'Album', album.address);
+                        }, function (error) {
+                            console.log(error);
+                        });
                 }, function (error) {
                     console.log(error);
                 })
