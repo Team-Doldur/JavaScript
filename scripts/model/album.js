@@ -22,6 +22,10 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
         }
 
         AlbumForDB.prototype.publish = function () {
+            var currentUserID = sessionStorage.getItem('currentUserId');
+            this.ACL = { };
+            this.ACL[currentUserID] = {"write": true, "read": true};
+            this.ACL['*'] = {"read": true};
             _requestHandler.postRequest(albumURL, this, 'application/json');
         };
 

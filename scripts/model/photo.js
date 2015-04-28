@@ -71,8 +71,14 @@ define(['q', 'requestHandler', 'albumModel'], function (Q, requestHandler, album
                             __type: "Pointer",
                             className: "_User",
                             objectId: authorId
-                        }
-                    }
+                        },
+                    };
+
+                    var currentUserID = sessionStorage.getItem('currentUserId');
+                    addPhotoData.ACL = { };
+                    addPhotoData.ACL[currentUserID] = {"write": true, "read": true};
+                    addPhotoData.ACL['*'] = {"read": true};
+                    
                     _this._requestHandler.postRequest(_this.url, addPhotoData)
                     .then(function(data){
                         console.log(data);
