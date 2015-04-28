@@ -50,7 +50,7 @@ define(['q', 'requestHandler', 'albumModel'], function (Q, requestHandler, album
                 return deffer.promise;
             };
 
-            PhotosRepo.prototype.postPhoto = function postPhoto(file, name, authorId, albumId){
+            PhotosRepo.prototype.postPhoto = function postPhoto(file, name, albumId, authorId){
                 var _this = this;
                 var deferred = Q.defer();
 

@@ -7,14 +7,17 @@ define(['mustache'], function (Mustache) {
             })
             .then(function () {
                 var photo;
+                var title='';
                 $('#upload-photo').bind("change", function (e) {
                     var files = e.target.files || e.dataTransfer.files;
                     photo = files[0];
                 });
 
                 $('#uploadbutton').click(function () {
-                    controller.sendPhoto(photo);
+                    controller.sendPhoto(photo, name, albumId, authorId);
                 });
+
+
 
             })
         }

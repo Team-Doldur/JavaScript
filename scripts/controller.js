@@ -100,8 +100,8 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
             )
         };
 
-        Controller.prototype.sendPhoto = function(photo){
-            this._model.photos.postPhoto(photo);
+        Controller.prototype.sendPhoto = function(file, name, albumId, authorId){
+            this._model.photos.postPhoto(file, name, albumId, authorId);
         }
 
         Controller.prototype.getViewAlbumPage = function (mainSelector, albumId) {
