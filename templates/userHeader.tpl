@@ -8,7 +8,7 @@
                     </a>
                     <ul>
                         <li class="active top">
-                            <a class="clearfix gallery" href="#/Category/Nature">
+                            <a class="clearfix gallery" href="#/Category/Nature/Beautiful+Sunsets">
                                 <span class="icon gallery"></span>
                                 <strong>Gallery</strong>
                             </a>
