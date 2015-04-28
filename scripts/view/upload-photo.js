@@ -27,16 +27,29 @@ define(['mustache', 'albumModel'], function (Mustache, albumModel) {
                     albumId,
                     authorId;
                 $('#upload-photo').bind("change", function (e) {
+                    var maxSize = 5000000;
                     var files = e.target.files || e.dataTransfer.files;
-                    photo = files[0];
+                    var fileType = this.files[0].type;
+                    var fileFormat = (fileType.split('/'))[1];
+                    if(!(fileFormat==='jpeg' || fileFormat==='png' || fileFormat==='gif')){
+                        alert("Not allowed format!")
+                    }
+                    else if (this.files[0].size>maxSize){
+                        alert("The file size is limited to 5 MB!");
+                    }else{
+                        photo = files[0];
+                    }
                 });
 
                 $('#uploadbutton').click(function () {
                     title = $('#photo-title').val();
                     albumId=$('#photo-album>option:selected').attr('value');
                     authorId = sessionStorage['currentUserId'];
-                    console.log(authorId);
-                    controller.sendPhoto(photo, title,albumId, authorId);
+                    if(photo){
+                        controller.sendPhoto(photo, title,albumId, authorId);
+                    }else{
+                        alert("Choose appropriate file!");
+                    }
                 });
             })
         }
