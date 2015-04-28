@@ -37,9 +37,16 @@ define(['requestHandler', 'q'], function (requestHandler, Q) {
         }
 
         function register(name, password, email) {
+            var deffer = Q.defer();
             var _requestHandler = requestHandler.load('https://api.parse.com/1/');
             newUser = new User(name, password, email);
-            _requestHandler.postRequest(userSignUpURL, newUser, 'application/json');
+            _requestHandler.postRequest(userSignUpURL, newUser, 'application/json')
+                .then(function(){
+                    deffer.resolve();
+                }, function(){
+                    deffer.reject();
+                });
+            return deffer.promise
         }
 
         function login(user, password, keepMeLogged) {

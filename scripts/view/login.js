@@ -5,21 +5,30 @@ define(['mustache', 'userModel', 'noty'], function (Mustache, userModel) {
                 var output = Mustache.render(template);
                 $(selector).html(output);
                 $('.submit-btn').click(function () {
-                    var username = $('.username').val();
-                    var password = $('.password').val();
+                    var container, redirectTimeout, redirectMsg, username, password, interval;
+
+                    container = $('.login-form-wrap');
+                    username = $('.username').val();
+                    password = $('.password').val();
+
                     userModel.login(username, password)
                         .then(function () {
-                            var container, redirectTimeout, redirectMsg;
-                            container = $('.login-form-wrap');
                             redirectTimeout = 3;
                             redirectMsg = 'Redirecting to main page in ' + redirectTimeout;
                             container.html(redirectMsg);
-                            setInterval(function () {
+                            interval = setInterval(function () {
                                 redirectTimeout -= 1;
                                 redirectMsg = 'Redirecting to main page in ' + redirectTimeout;
                                 container.html(redirectMsg);
+
+                                if (window.location.hash != "#/Login") {
+                                    clearInterval(interval);
+                                }
+
                                 if (redirectTimeout <= 0) {
-                                    $('.login-form-wrap').html('Redirecting...');
+                                    clearInterval(interval);
+
+                                    container.html('Redirecting...');
                                     setTimeout(function () {
                                         window.location.replace('#/');
                                     }, 1000);
@@ -27,7 +36,7 @@ define(['mustache', 'userModel', 'noty'], function (Mustache, userModel) {
                             }, 1000);
                             container.parent().noty({text: "Login success", type: 'success'})
                         }, function () {
-                            $('.login-form-wrap').noty({text: "Invalid info", type: 'error'})
+                            container.noty({text: "Invalid info", type: 'error'})
                         }
                     )
                 })
