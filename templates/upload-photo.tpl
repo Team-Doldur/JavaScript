@@ -28,6 +28,18 @@
                             {{/categories}}
                         </select>
                     </li>
+                    <li>
+                        <label for="photo-album">
+                            <h4>Album</h4>
+                        </label>
+                        <select name="" id="photo-album">
+
+                            <option value="{{id}}">
+                                <span></span>
+                            </option>
+
+                        </select>
+                    </li>
                 </ul>
 
             </div>
