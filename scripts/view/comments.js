@@ -1,10 +1,10 @@
 define(['mustache'], function (Mustache) {
     return (function () {
-        function CommentsView(selector, data, albumId) {
+        function CommentsView(selector, comments, albumId) {
             $.get('templates/comments.tpl', function (template) {
                 Mustache.parse(template);
                 var rendered = Mustache.render(template, {
-                    comments: data.results,
+                    comments: comments,
                     resourceId: albumId,
                     resourceType: 'Album'
                 });

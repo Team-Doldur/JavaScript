@@ -7,7 +7,7 @@
             </div>
             <div class="comment-info">
                 <p class="author">By <span>{{authorName}}</span></p>
-                <p>{{createdAt}}</p>
+                <p>{{date}}</p>
             </div>
 
         </div>
