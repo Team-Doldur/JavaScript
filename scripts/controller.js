@@ -79,8 +79,9 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
         Controller.prototype.getCreateAlbumPage = function (mainSelector, model) {
             model.categories.getCategories().then(
                 function (data) {
-                    createAlbumView.load(mainSelector, data);
-
+                    if (sessionStorage['logged-in']) {
+                        createAlbumView.load(mainSelector, data);
+                    }
                 },
                 function (error) {
                     console.error(error);
@@ -92,7 +93,9 @@ define(['headerView' ,'footerView', 'homeView', 'registerView', 'loginView', 'ca
             var _this = this;
             model.categories.getCategories().then(
                 function (data) {
-                    uploadPhotoView.load(mainSelector, data, _this);
+                    if (sessionStorage['logged-in']) {
+                        uploadPhotoView.load(mainSelector, data, _this);
+                    }
                 },
                 function (error) {
                     console.error(error);
