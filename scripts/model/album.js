@@ -93,6 +93,19 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             return defer.promise;
         };
 
+        AlbumRepo.prototype.getAlbumsByCategory = function (categoryId) {
+            var defer = Q.defer();
+
+            this._requestHandler.getRequest(albumURL + '?where={"category": { "__type": "Pointer", "className": "Category", "objectId": "' + categoryId + '"}}')
+                .then(function (data) {
+                    defer.resolve(data);
+                }, function (error) {
+                    defer.reject(error);
+                });
+
+            return defer.promise;
+        };
+
         AlbumRepo.prototype.getAlbumIdByName = function (name) {
             var deffer = Q.defer();
             var filter = '?where={"name":"' + name + '"}';
