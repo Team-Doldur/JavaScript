@@ -9,7 +9,7 @@ define(['q', 'requestHandler'], function (Q, requestHandler) {
         var defer = Q.defer();
         var comments = [];
 
-        this._requestHandler.getRequest(serviceUrl + '?where=' + JSON.stringify({
+        this._requestHandler.getRequest(serviceUrl + '?order=createdAt&where=' + JSON.stringify({
                 resourceType: resourceType,
                 resourceId : resourceId
             }))
