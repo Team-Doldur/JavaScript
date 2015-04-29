@@ -24,10 +24,18 @@ define(['mustache', 'albumModel'], function (Mustache, albumModel) {
                     var fileFormat = (fileType.split('/'))[1];
                     if(!(fileFormat==='jpeg' || fileFormat==='png' || fileFormat==='gif')){
                         notificationContainer.noty({text: "Format not allowed. Also for some reason you will have to reaload tha whole damn page for the thing to work again.", type: "warning"})
-                        notificationContainer.noty({text: "And I have no clue how to fix it and it's like 4 am and I've had about 20 hours of sleep total during the last 10 days and we will have to present this whole thing in about uhm 6 hours and 13 minutes at the time of writing this", type: "warning"})
+                        notificationContainer.noty({text: "And I have no clue how to fix it and it's like 4 am and " +
+                        "I've had about 20 hours of sleep total during the last 10 days and we will have " +
+                        "to present this whole thing in about uhm 6 hours and 13 minutes at the time of writing this", type: "warning"});
+
+                        //
+                        UploadPhotoView(selector, data, controller);
                     }
                     else if (this.files[0].size>maxSize){
-                        notificationContainer.noty({text: "The file size is limited to 5 MB!", type: "warning"})
+                        notificationContainer.noty({text: "The file size is limited to 5 MB!", type: "warning"});
+
+                        //
+                        UploadPhotoView(selector, data, controller);
                     }else{
                         photo = files[0];
                     }
