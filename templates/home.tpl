@@ -1,6 +1,6 @@
 <section class="masthead">
     <div class="text-wrap">
-        <h1>Home to everyone's best photos</h1>
+        <h1>The best place to store your photos</h1>
         <h2>Showcase to your work, discover amazing photos, and stay inspired.</h2>
         <a class="button-large button" href="#/Register">Get started</a>
     </div>
