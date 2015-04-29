@@ -35,7 +35,7 @@
                             </div>
                         </li>
                         <li class="top">
-                            <a class="clearfix logout no-icon" href="#/"><!--login page-->
+                            <a class="clearfix logout no-icon">
                                 <strong>Logout</strong>
                             </a>
                         </li>

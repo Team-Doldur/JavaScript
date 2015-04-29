@@ -4,7 +4,7 @@
         <ul class="clearfix">
             {{#photos}}
             <li class="picture">
-                <a href="{{& address}}" download="{{&name}}"><img src="{{& address}}" alt="{{name}}" /></a>
+                <a href="{{& address}}"><img src="{{& address}}" alt="{{name}}"/></a>
             </li>
             {{/photos}}
         </ul>

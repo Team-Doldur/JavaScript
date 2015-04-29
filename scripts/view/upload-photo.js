@@ -45,10 +45,35 @@ define(['mustache', 'albumModel'], function (Mustache, albumModel) {
                     title = $('#photo-title').val();
                     albumId=$('#photo-album>option:selected').attr('value');
                     authorId = sessionStorage['currentUserId'];
+                    var notificationContainer = $('.signup-wrap');
                     if(photo){
-                        controller.sendPhoto(photo, title,albumId, authorId);
+                        notificationContainer = $('.upload-photo');
+                        controller.sendPhoto(photo, title,albumId, authorId)
+                            .then(function () {
+                            var redirectTimeout = 3;
+                            var redirectMsg = 'Redirecting to main page in ' + redirectTimeout;
+                            notificationContainer.html(redirectMsg);
+                            var interval = setInterval(function () {
+                                redirectTimeout -= 1;
+                                redirectMsg = 'Redirecting to main page in ' + redirectTimeout;
+                                notificationContainer.html(redirectMsg);
+
+                                if (window.location.hash != "#/Upload") {
+                                    clearInterval(interval);
+                                }
+
+                                if (redirectTimeout <= 0) {
+                                    clearInterval(interval);
+                                    notificationContainer.html('Redirecting...');
+                                    setTimeout(function () {
+                                        window.location.replace('#/');
+                                    }, 1000);
+                                }
+                            }, 1000);
+                            notificationContainer.parent().noty({text: "Upload successful", type: 'success'})
+                        })
                     }else{
-                        alert("Choose appropriate file!");
+                        notificationContainer.noty({text: "Please slect appropriate file", type: "warning"})
                     }
                 });
             })

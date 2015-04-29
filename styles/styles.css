@@ -535,6 +535,13 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
   border-radius: 2px;
   box-shadow: 1px 1px 5px 1px #b9c1c7;
 }
+.picture > a > .download{
+  position: absolute;
+  margin: 10px 10px 0 0;
+  float: right;
+  border-radius: 2px;
+  box-shadow: 1px 1px 5px 1px #b9c1c7;
+}
 
 /*album*/
 #album-wrapper {

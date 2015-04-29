@@ -3,11 +3,21 @@ define(['mustache', 'userModel'], function (Mustache, userModel) {
         function HeaderView(selector, data) {
             var output;
             if (sessionStorage['sessionToken']) {
-                $.get('templates/userHeader.tpl', function(template){
+                $.get('templates/userHeader.tpl', function (template) {
                     output = Mustache.render(template, data);
                     $(selector).html(output);
-                    $('.logout').click(function(){
-                        userModel.logout();
+                    $('.logout').click(function () {
+                        userModel.logout()
+                            .then(function () {
+                                sessionStorage.clear();
+                                $('.profile').html('').noty({text: "Please come again"});
+                                setTimeout(function(){
+                                    $.get('templates/guestHeader.tpl', function (template) {
+                                        output = Mustache.render(template);
+                                        $(selector).html(output);
+                                    })
+                                }, 1000);
+                            })
                     })
                 })
             } else {

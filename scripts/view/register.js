@@ -15,21 +15,26 @@ define(['mustache', 'userModel'], function (Mustache, userModel) {
                     userModel.register(username, password, email)
                         .then(function () {
                             redirectTimeout = 3;
-                            redirectMsg = 'Redirecting to main page in ' + redirectTimeout;
+                            redirectMsg = 'Redirecting to login page in ' + redirectTimeout;
                             notificationContainer.html(redirectMsg);
                             interval = setInterval(function () {
                                 redirectTimeout -= 1;
-                                redirectMsg = 'Redirecting to main page in ' + redirectTimeout;
+                                redirectMsg = 'Redirecting to login page in ' + redirectTimeout;
                                 notificationContainer.html(redirectMsg);
+
+                                if (window.location.hash != "#/Register") {
+                                    clearInterval(interval);
+                                }
+
                                 if (redirectTimeout <= 0) {
                                     clearInterval(interval);
                                     notificationContainer.html('Redirecting...');
                                     setTimeout(function () {
-                                        window.location.replace('#/');
+                                        window.location.replace('#/Login');
                                     }, 1000);
                                 }
                             }, 1000);
-                            notificationContainer.parent().noty({text: "Login success", type: 'success'})
+                            notificationContainer.parent().parent().noty({text: "Register success", type: 'success'})
                         }, function () {
                             notificationContainer.noty({text: "Invalid register parameters", type: 'error'})
                         });

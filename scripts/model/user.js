@@ -37,16 +37,9 @@ define(['requestHandler', 'q'], function (requestHandler, Q) {
         }
 
         function register(name, password, email) {
-            var deffer = Q.defer();
             var _requestHandler = requestHandler.load('https://api.parse.com/1/');
             newUser = new User(name, password, email);
-            _requestHandler.postRequest(userSignUpURL, newUser, 'application/json')
-                .then(function(){
-                    deffer.resolve();
-                }, function(){
-                    deffer.reject();
-                });
-            return deffer.promise
+            return _requestHandler.postRequest(userSignUpURL, newUser, 'application/json');
         }
 
         function login(user, password, keepMeLogged) {
@@ -70,26 +63,20 @@ define(['requestHandler', 'q'], function (requestHandler, Q) {
                         .then(function (data) {
                             sessionStorage['currentUser'] = data.username;
                             sessionStorage['currentUserId'] = data.objectId;
-                            //window.location.replace('#/');
                             deffer.resolve();
                         });
                     if (keepMeLogged) {
                         localStorage['sessionToken'] = data.sessionToken;
                     }
-                }, function(err){
+                }, function (err) {
                     deffer.reject(err);
                 });
             return deffer.promise
         }
 
         function logout() {
-            var _requestHandler = requestHandler.load('https://api.parse.com/1/')
-
-            _requestHandler.postRequest('logout')
-                .then(function(){
-                    sessionStorage.clear();
-                    window.location.reload(true);
-                });
+            var _requestHandler = requestHandler.load('https://api.parse.com/1/');
+            return _requestHandler.postRequest('logout');
         }
 
         return {
