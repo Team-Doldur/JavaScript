@@ -16,7 +16,7 @@
                         <label for="photo-title">
                             <h4>Title</h4>
                         </label>
-                        <input type="text" id="photo-title" placeholder="img"/>
+                        <input type="text" id="photo-title" placeholder="Photo Title"/>
                     </li>
                     <li>
                         <label for="photo-category">
