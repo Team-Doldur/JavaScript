@@ -9,7 +9,10 @@ define(['mustache', 'albumModel'], function (Mustache, albumModel) {
                     var author = sessionStorage['currentUserId'];
                     var name = $('#album-title').val();
                     var address = name.split(' ').join('+');
-                    albumModel.createAlbum(name, author, category);
+                    albumModel.createAlbum(name, author, category)
+                        .then(function(){
+                            $('.upload-photo').parent().noty({text: 'Album created;', type: "success"});
+                        });
                 });
             })
         }

@@ -422,7 +422,7 @@ strong.signup:hover, .btn-bottom:hover, .submit-btn:hover{
 }
 
 .upload-photo .submit-btn, #uploadbutton {
-  width: 50%;
+  width: 100%;
   height: 50px;
   float: right;
 

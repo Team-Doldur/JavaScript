@@ -26,7 +26,7 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
             this.ACL = { };
             this.ACL[currentUserID] = {"write": true, "read": true};
             this.ACL['*'] = {"read": true};
-            _requestHandler.postRequest(albumURL, this, 'application/json');
+            return _requestHandler.postRequest(albumURL, this, 'application/json');
         };
 
         function Pointer(name, id) {
@@ -162,7 +162,7 @@ define(['q', 'requestHandler', 'categoryModel'], function (Q, requestHandler, ca
         createAlbum: function (name, author, category) {
             var address = name.split(' ').join('+');
             var newAlbum = new Album(null, name, address, author, category, true);
-            newAlbum.publish();
+            return newAlbum.publish();
         }
     }
 });

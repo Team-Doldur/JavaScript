@@ -25,7 +25,7 @@
 
             </div>
             <div class="buttons clearfix">
-                <a class="cancel-btn" href="#/">Cancel</a>
+                <!--<a class="cancel-btn" href="#/">Cancel</a>-->
                 <a class="submit-btn" id="new-album" href="#/NewAlbum">Publish</a>
             </div>
         </div>
