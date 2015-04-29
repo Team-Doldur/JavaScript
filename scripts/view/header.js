@@ -16,7 +16,7 @@ define(['mustache', 'userModel'], function (Mustache, userModel) {
                                         output = Mustache.render(template);
                                         $(selector).html(output);
                                     })
-                                }, 1000);
+                                }, 1500);
                             })
                     })
                 })
