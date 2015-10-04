@@ -1,1 +1,1 @@
-<h1><a href="http://doldur.kostovi.eu/">Album Doldur</a></h1>
+<h1><a href="http://doldur.kostov.net/">Album Doldur</a></h1>
